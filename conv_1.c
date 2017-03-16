@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/01/30 17:52:48 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/16 18:40:08 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		conv(char type, t_flag *active, va_list args)
 	while (i < 7)
 	{
 		if (ft_strchr(g_conv[i].type, type))
-			return (g_conv[0].function(type, active, args));
+			return (g_conv[i].function(type, active, args));
 		i++;
 	}
 	return (0);
@@ -39,13 +39,13 @@ int		conv_int(char type, t_flag *active, va_list args)
 {
 	int		len;
 	int		nbr;
+	char	*buffer;
 
-	if (type)
-		nbr = 1;
 	nbr = va_arg(args, int);
 	len = ft_strlen(ft_itoa(nbr));
-	apply_flags(type, active);
-	ft_putnbr(nbr);
+	buffer = (char*)malloc(sizeof(char) * (len + 1));
+	ft_strcpy(buffer, ft_itoa(nbr));
+	apply_flags(type, buffer, len, active);
 	return (len);
 }
 
@@ -65,7 +65,14 @@ int		conv_c(char type, t_flag *active, va_list args)
 
 int		conv_s(char type, t_flag *active, va_list args)
 {
-	if (type && active && args)
-		return (1);
-	return (0);
+	char	*str;
+	int		len;
+	char	*buffer;
+
+	str = va_arg(args, char*);
+	len = ft_strlen(str);
+	buffer = (char*)malloc(sizeof(char) * (len + 1));
+	ft_strcpy(buffer, str);
+	apply_flags(type, buffer, len, active);
+	return (len);
 }

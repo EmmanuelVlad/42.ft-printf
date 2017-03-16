@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 08:21:45 by evlad             #+#    #+#             */
-/*   Updated: 2017/01/30 17:51:10 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/16 18:36:34 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct		s_flag
 	int				zero;
 	int				minus;
 	int				plus;
-	int				space;
+	int				min_size;
+	int				precision;
+	int				precision_size;
 	int				l;
 	int				ll;
 	int				h;
@@ -68,19 +70,34 @@ int					formating(const char *format, va_list args);
 */
 
 t_flag				*init_flag(void);
-void				check_flags(const char *flag, t_flag *active);
-void				apply_flags(char converter, t_flag *active);
+int					check_flags(const char *flag, t_flag *active);
+void				apply_flags(char converter, char *buffer, int length,
+						t_flag *active);
+
+
+/* First flags */
+void				apply_first_flags(char converter, char *buffer, int length,
+						t_flag *active);
 int					apply_flag_diese(char converter);
 int					apply_flag_zero(char converter);
-int					apply_flag_minus(char converter);
-int					apply_flag_plus(char converter);
-int					apply_flag_space(char converter);
+int					apply_flag_plus(char converter, char *buffer);
+int					apply_flag_min_size(char converter, int length, 
+						t_flag *active);
 int					apply_flag_l(char converter);
 int					apply_flag_ll(char converter);
 int					apply_flag_h(char converter);
 int					apply_flag_hh(char converter);
 int					apply_flag_j(char converter);
 int					apply_flag_z(char converter);
+
+/* Last flags */
+void				apply_last_flags(char converter, char *buffer, int length,
+						t_flag *active);
+int					apply_flag_minus(char converter, int length,
+						t_flag *active);
+int					apply_flag_precision(char converter);
+char				*apply_flag_precision_size(char converter, char *buffer,
+						t_flag *active);
 
 /*
 ** --------------------------------------------------------------------------

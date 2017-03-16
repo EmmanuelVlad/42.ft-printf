@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_flags_1.c                                    :+:      :+:    :+:   */
+/*   apply_first_flags.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/30 17:06:50 by evlad             #+#    #+#             */
-/*   Updated: 2017/01/30 17:06:52 by evlad            ###   ########.fr       */
+/*   Created: 2017/03/13 18:17:14 by evlad             #+#    #+#             */
+/*   Updated: 2017/03/16 17:30:13 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	apply_flags(char converter, t_flag *active)
+void	apply_first_flags(char converter, char *buffer, int length, t_flag *active)
 {
 	if (active->diese)
 		apply_flag_diese(converter);
 	if (active->zero)
 		apply_flag_zero(converter);
-	if (active->minus)
-		apply_flag_minus(converter);
 	if (active->plus)
-		apply_flag_plus(converter);
-	if (active->space)
-		apply_flag_space(converter);
+		apply_flag_plus(converter, buffer);
+	if (active->min_size && !active->minus)
+		apply_flag_min_size(converter, length, active);
 	if (active->l)
 		apply_flag_l(converter);
 	if (active->ll)
@@ -36,32 +34,4 @@ void	apply_flags(char converter, t_flag *active)
 		apply_flag_j(converter);
 	if (active->z)
 		apply_flag_z(converter);
-}
-
-int		apply_flag_diese(char converter)
-{
-	if (converter)
-		write(1, "#", 1);
-	return (0);
-}
-
-int		apply_flag_zero(char converter)
-{
-	if (converter)
-		write(1, "0", 1);
-	return (0);
-}
-
-int		apply_flag_minus(char converter)
-{
-	if (converter)
-		write(1, "-", 1);
-	return (0);
-}
-
-int		apply_flag_plus(char converter)
-{
-	if (converter)
-		write(1, "+", 1);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 08:14:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/01/30 17:53:55 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/16 16:00:29 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int		formating(const char *restrict format, va_list args)
 	i = 1;
 	while (conv(format[i], active, args) == 0)
 	{
-		check_flags(format + i, active);
-		i++;
+		i += 1 + check_flags(format + i, active);
 	}
 	return (i);
 }

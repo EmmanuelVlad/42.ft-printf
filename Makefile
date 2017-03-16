@@ -6,12 +6,23 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/15 11:03:58 by evlad             #+#    #+#              #
-#    Updated: 2017/01/30 17:10:00 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/16 18:36:05 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFILES = ft_printf.c main.c formating.c apply_flags_1.c apply_flags_2.c \
-		 apply_flags_3.c init_struct.c conv_1.c conv_2.c check_flags.c \
+CFILES = ft_printf.c \
+		 main.c \
+		 formating.c \
+		 apply_flags.c \
+		 apply_first_flags.c \
+		 apply_first_flags_2.c \
+		 apply_first_flags_3.c \
+		 apply_first_flags_4.c \
+		 apply_last_flags.c \
+		 init_struct.c \
+		 conv_1.c \
+		 conv_2.c \
+		 check_flags.c \
 
 FLAGS = -g -Wextra -Werror -Wall 
 

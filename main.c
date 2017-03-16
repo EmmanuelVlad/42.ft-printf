@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:32:48 by evlad             #+#    #+#             */
-/*   Updated: 2017/01/30 17:57:22 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/16 18:28:18 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 int		main(void)
 {
-	ft_printf("FT_PRINTF: %0#+d", 1);
-	printf("\n\nPRINTF: %+d", 1);
+	char	*str;
+	char	*str2;
+	int		nbr;
+
+	str = "J'adore tester printf";
+	str2 = "test";
+	nbr = 1337;
+
+	ft_printf("FT_PRINTF:%14.12d %-7.3s", nbr, str2);
+	printf("\n   PRINTF:%14.12d %-7.3s\n", nbr, str2);
 	return (0);
 }
