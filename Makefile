@@ -6,23 +6,22 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/15 11:03:58 by evlad             #+#    #+#              #
-#    Updated: 2017/03/16 18:36:05 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/23 18:57:17 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFILES = ft_printf.c \
-		 main.c \
-		 formating.c \
-		 apply_flags.c \
-		 apply_first_flags.c \
-		 apply_first_flags_2.c \
-		 apply_first_flags_3.c \
-		 apply_first_flags_4.c \
-		 apply_last_flags.c \
 		 init_struct.c \
+		 formating.c \
+		 check_flags.c \
+		 apply_flags.c \
+		 apply_flags_2.c \
+		 apply_flags_3.c \
+		 apply_flags_4.c \
+		 apply_precision.c \
 		 conv_1.c \
 		 conv_2.c \
-		 check_flags.c \
+		 main.c
 
 FLAGS = -g -Wextra -Werror -Wall 
 
@@ -31,6 +30,8 @@ NAME = printf
 INC = header.h
 
 OK = "	\033[1;32m[OK]\033[0m"
+
+OBJ_FILE = "obj"
 
 OBJ = $(CFILES:%.c=%.o)
 
@@ -46,11 +47,12 @@ all: $(NAME)
 
 $(NAME):
 	@echo -n '-> Compilating'
-#	@make -C ./libft/
+	@make -C ./libft/
 	@echo -n '.'
+	@mkdir -p $(OBJ_FILE)
 	@gcc -c $(FLAGS) $(CFILES)
 	@echo -n '.'
-	@gcc -L ./libft/ -lft $(OBJ) -o $(NAME)
+	@gcc -L ./ -lftprintf $(OBJ) -o $(NAME)
 	@echo -n '.	'
 	@echo $(OK)
 
@@ -63,7 +65,7 @@ clean:
 fclean: clean
 	@echo -n '-> Deleting executable file...'
 	@/bin/rm -f $(NAME)
-#	@make -C ./libft/ fclean
+	@make -C ./libft/ fclean
 	@echo $(OK)
 
 re: fclean all

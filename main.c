@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:32:48 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/16 18:28:18 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/23 18:32:35 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,16 @@ int		main(void)
 
 	str = "J'adore tester printf";
 	str2 = "test";
-	nbr = 1337;
+	nbr = -1337;
 
-	ft_printf("FT_PRINTF:%14.12d %-7.3s", nbr, str2);
-	printf("\n   PRINTF:%14.12d %-7.3s\n", nbr, str2);
+/*
+	ft_printf("FT_PRINTF:'%14.3d' '%7.15s' '%10%' lol wtf", 1337, str2);
+	printf("\n   PRINTF:'%14.3d' '%7.15s' '%+10%' lol wtf\n", 1337, str2);
+	ft_printf("\nFT_PRINTF:'%+-15.9d' '%10s' %+10% lol wtf\n", nbr, str2);
+	printf("   PRINTF:'%+-15.9d' '%10s' %+10% lol wtf\n", nbr, str2);
+*/
+	ft_printf("FT_PRINTF:'%s'", str);
+	printf("\n   PRINTF:'%s'\n", str);
+
 	return (0);
 }

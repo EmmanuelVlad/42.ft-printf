@@ -1,48 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_first_flags_3.c                              :+:      :+:    :+:   */
+/*   apply_flags_3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/13 18:18:56 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/13 18:19:01 by evlad            ###   ########.fr       */
+/*   Created: 2017/03/23 17:02:05 by evlad             #+#    #+#             */
+/*   Updated: 2017/03/23 17:02:06 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int		apply_flag_l(char converter)
+int		apply_l(t_flag *active)
 {
-	if (converter)
+	if (active->converter)
 		write(1, "l", 1);
 	return (0);
 }
 
-int		apply_flag_ll(char converter)
+int		apply_ll(t_flag *active)
 {
-	if (converter)
+	if (active->converter)
 		write(1, "l", 1);
 	return (0);
 }
 
-int		apply_flag_h(char converter)
+int		apply_h(t_flag *active)
 {
-	if (converter)
+	if (active->converter)
 		write(1, "h", 1);
 	return (0);
 }
 
-int		apply_flag_hh(char converter)
+int		apply_hh(t_flag *active)
 {
-	if (converter)
+	if (active->converter)
 		write(1, "hh", 1);
 	return (0);
 }
 
-int		apply_flag_j(char converter)
+int		apply_j(t_flag *active)
 {
-	if (converter)
+	if (active->converter)
 		write(1, "j", 1);		
 	return (0);
 }

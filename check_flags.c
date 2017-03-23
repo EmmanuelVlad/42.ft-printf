@@ -6,21 +6,33 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 15:06:27 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/16 15:50:24 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/23 18:16:38 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int		check_flags(const char *flag, t_flag *active)
+int		check_flags_2(const char *flag, t_flag *active)
 {
 	int i;
 
 	i = 0;
+	while (flag[i] >= 48 && flag[i] <= 57 && active->precision == -1)
+		active->width = (active->width * 10) + (int)(flag[i++] - 48);
+	while (flag[i] >= 48 && flag[i] <= 57 && active->precision != -1)
+		active->precision = (active->precision * 10) + (int)(flag[i++] - 48);
+	if (i == 0)
+		return (0);
+	else
+		return (i - 1);
+}
+
+int		check_flags(const char *flag, t_flag *active)
+{
 	if (flag[0] == '+')
 		active->plus = 1;
 	if (flag[0] == ' ')
-		active->min_size = 1;
+		active->space = 1;
 	if (flag[0] == '#')
 		active->diese = 1;
 	if (flag[0] == '0')
@@ -40,23 +52,6 @@ int		check_flags(const char *flag, t_flag *active)
 	if (flag[0] == 'z')
 		active->z = 1;
 	if (flag[0] == '.')
-		active->precision = 1;
-	while (flag[i] >= 48 && flag[i] <= 57 && active->precision != 1)
-	{
-		if (active->min_size)
-			active->min_size *= 10;
-		active->min_size += (int)(flag[i] - 48);
-		i++;
-	}
-	while (flag[i] >= 48 && flag[i] <= 57 && active->precision == 1)
-	{
-		if (active->precision_size)
-			active->precision_size *= 10;
-		active->precision_size += (int)(flag[i] - 48);
-		i++;
-	}
-	if (i == 0)
-		return (0);
-	else
-		return (i - 1);
+		active->precision = 0;
+	return (check_flags_2(flag, active));
 }

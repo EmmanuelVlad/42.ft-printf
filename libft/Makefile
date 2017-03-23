@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2016/11/24 18:00:23 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/23 18:39:52 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,19 +71,21 @@ OBJ = $(LIST:%.c=%.o)
 
 FLAGS = -Wextra -Werror -Wall
 
-NAME = libft.a
+NAME = libftprintf.a
 
 all: $(NAME)
 
 $(NAME):
 	@gcc -c $(LIST)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	@ar rc ../$(NAME) $(OBJ)
+	@ranlib ../$(NAME)
 	
 clean:
 	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	@/bin/rm -f ../$(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
