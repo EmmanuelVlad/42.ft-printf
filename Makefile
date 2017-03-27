@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/15 11:03:58 by evlad             #+#    #+#              #
-#    Updated: 2017/03/23 18:57:17 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/27 18:09:51 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ CFILES = ft_printf.c \
 		 apply_flags.c \
 		 apply_flags_2.c \
 		 apply_flags_3.c \
-		 apply_flags_4.c \
 		 apply_precision.c \
 		 conv_1.c \
 		 conv_2.c \
+		 cast.c \
 		 main.c
 
 FLAGS = -g -Wextra -Werror -Wall 

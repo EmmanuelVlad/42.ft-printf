@@ -6,11 +6,28 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 15:06:27 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/23 18:16:38 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/27 18:08:36 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+int		check_size(t_flag *active)
+{
+	if (active->l)
+		return (1);
+	else if (active->ll)
+		return (1);
+	else if (active->h)
+		return (1);
+	else if (active->hh)
+		return (1);
+	else if (active->j)
+		return (1);
+	else if (active->z)
+		return (1);
+	return (0);
+}
 
 int		check_flags_2(const char *flag, t_flag *active)
 {

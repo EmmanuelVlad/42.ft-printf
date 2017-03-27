@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/23 18:02:37 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/27 18:37:59 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,57 @@ int		conv(char type, t_flag *active, va_list args)
 	return (0);
 }
 
-int		conv_int(char type, t_flag *active, va_list args)
+char	*unsigned_oux_int(va_list args, uintmax_t u_int, t_flag *active)
 {
-	int		len;
-	char	*nbr;
-
-	nbr = ft_itoa(va_arg(args, int));
-	len = ft_strlen(nbr);
-	active->converter = type;
-	apply_flags(nbr, len, active);
-	return (len);
+	active->malloc = 1;
+	u_int = unsigned_cast(args, active);
+	if (active->converter == 'o')
+		return (ft_itoa_base_uint(u_int, 8));
+	else if (active->converter == 'u')
+		return (ft_itoa_base_uint(u_int, 10));
+	else if (active->converter == 'X')
+		return (ft_strtoupper(ft_itoa_base_uint(u_int, 16)));
+	return (ft_itoa_base_uint(u_int, 16));
 }
 
-int		conv_dou(char type, t_flag *active, va_list args)
-{
-	if (type && active && args)
-		return (1);
-	return (0);
-}
-
-int		conv_c(char type, t_flag *active, va_list args)
+char	*unsigned_int(va_list args, t_flag *active)
 {
 	char	*str;
-	
-	str = ft_strnew(2);
-	active->malloc = 1;
-	str[0] = (unsigned char)va_arg(args, int);
-	str[1] = '\0';
+
+	str = NULL;
+	if (active->converter == 'd')
+		str = ft_itoa_base(va_arg(args, int), 10);
+	return (str);
+}
+
+int		conv_int(char type, t_flag *active, va_list args)
+{
+	intmax_t s_int;
+	uintmax_t u_int;
+	int		len;
+	char	*str;
+
 	active->converter = type;
-	apply_flags(str, 1, active);
-	return (1);
+	s_int = 0;
+	u_int = 0;
+	if (check_size(active) && ft_strchr("di", active->converter))
+	{
+		s_int = signed_cast(args, active);
+		if (s_int == -9223372036854775807 - 1)
+			str = "-9223372036854775808";
+		else
+		{
+			active->malloc = 1;
+			str = ft_itoa_base(s_int, 10);
+		}
+	}
+	else if (check_size(active) && ft_strchr("ouxX", active->converter))
+		str = unsigned_oux_int(args, u_int, active);
+	else
+		str = unsigned_int(args, active);
+	len = ft_strlen(str);
+	apply_flags(str, len, active);
+	return (len);
 }
 
 int		conv_s(char type, t_flag *active, va_list args)

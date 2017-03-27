@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/03/23 18:39:52 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/27 18:36:08 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ LIST = ft_memset.c \
 	   ft_isalnum.c \
 	   ft_isascii.c \
 	   ft_isprint.c \
+	   ft_itoa.c \
+	   ft_itoa_base.c \
+	   ft_itoa_base_uint.c \
 	   ft_toupper.c \
 	   ft_tolower.c \
 	   ft_memalloc.c \
@@ -53,7 +56,6 @@ LIST = ft_memset.c \
 	   ft_strjoin.c \
 	   ft_strtrim.c \
 	   ft_strsplit.c \
-	   ft_itoa.c \
 	   ft_putchar.c \
 	   ft_putstr.c \
 	   ft_putendl.c \
@@ -65,7 +67,9 @@ LIST = ft_memset.c \
 	   ft_countword.c \
 	   ft_countsword.c \
 	   ft_countletter.c \
-	   ft_countsletter.c
+	   ft_countsletter.c \
+	   ft_strtoupper.c \
+	   ft_strtolower.c
 
 OBJ = $(LIST:%.c=%.o)
 

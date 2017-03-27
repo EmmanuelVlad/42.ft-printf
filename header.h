@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 08:21:45 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/23 17:04:47 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/27 18:37:43 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ typedef struct		s_conv
 int					ft_printf(const char *format, ...);
 int					formating(const char *format, va_list args);
 
+int					check_size(t_flag *active);
+intmax_t			signed_cast(va_list args, t_flag *active);
+uintmax_t			unsigned_cast(va_list args, t_flag *active);
+
 /*
 ** --------------------------------------------------------------------------
 **								    FLAGS
@@ -81,12 +85,6 @@ int					apply_zero(t_flag *active);
 char				*apply_plus(char *buffer, t_flag *active);
 char				*apply_width(char *buffer, t_flag *active);
 char				*apply_space(char *buffer, t_flag *active);
-int					apply_l(t_flag *active);
-int					apply_ll(t_flag *active);
-int					apply_h(t_flag *active);
-int					apply_hh(t_flag *active);
-int					apply_j(t_flag *active);
-int					apply_z(t_flag *active);
 char				*apply_last_flags(char *buffer, int length, t_flag *active);
 char				*apply_precision(char *buffer, int length, t_flag *active);
 char				*apply_minus(char *buffer, t_flag *active);
