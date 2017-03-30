@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 18:34:53 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/27 18:07:01 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 21:04:44 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*apply_flags_2(char *buffer, int length, t_flag *active)
 	if (active->space)
 		buffer = apply_space(buffer, active);
 	if (active->diese)
-		apply_diese(active);
+		buffer = apply_diese(buffer, active);
 	if (active->zero)
 		apply_zero(active);
 	if (active->plus)
@@ -31,9 +31,9 @@ char	*apply_flags_2(char *buffer, int length, t_flag *active)
 	return (buffer);
 }
 
-char	*apply_flags(char *buffer, int length, t_flag *active)
+void	apply_flags(char *buffer, int length, t_flag *active)
 {
 	buffer = apply_flags_2(buffer, length, active);
 	ft_putstr(buffer);
-	return (buffer);
+	freemalloc(buffer, active, 0);
 }

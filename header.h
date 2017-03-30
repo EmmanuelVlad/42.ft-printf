@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 08:21:45 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/27 18:37:43 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 21:01:28 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef struct		s_flag
 	int				z;
 	char			converter;
 
-	int				malloc;
+	int				first_malloc;
+	int				second_malloc;
 }					t_flag;
 
 typedef struct		s_conv
@@ -70,6 +71,8 @@ int					check_size(t_flag *active);
 intmax_t			signed_cast(va_list args, t_flag *active);
 uintmax_t			unsigned_cast(va_list args, t_flag *active);
 
+void				freemalloc(char *buffer, t_flag *active, int realloc);
+
 /*
 ** --------------------------------------------------------------------------
 **								    FLAGS
@@ -78,9 +81,9 @@ uintmax_t			unsigned_cast(va_list args, t_flag *active);
 
 t_flag				*init_flag(void);
 int					check_flags(const char *flag, t_flag *active);
-char				*apply_flags(char *buffer, int length, t_flag *active);
+void				apply_flags(char *buffer, int length, t_flag *active);
 
-int					apply_diese(t_flag *active);
+char				*apply_diese(char *buffer, t_flag *active);
 int					apply_zero(t_flag *active);
 char				*apply_plus(char *buffer, t_flag *active);
 char				*apply_width(char *buffer, t_flag *active);

@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 12:21:11 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 21:42:10 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int		conv(char type, t_flag *active, va_list args)
 	return (0);
 }
 
-char	*unsigned_oux_int(va_list args, uintmax_t u_int, t_flag *active)
+char	*unsigned_oux_int(va_list args, t_flag *active)
 {
-	active->malloc = 1;
+	uintmax_t	u_int;
+
+	active->first_malloc = 1;
 	u_int = unsigned_cast(args, active);
 	if (active->converter == 'o')
 		return (ft_itoa_base_uint(u_int, 8));
@@ -50,24 +52,28 @@ char	*unsigned_oux_int(va_list args, uintmax_t u_int, t_flag *active)
 
 char	*unsigned_int(va_list args, t_flag *active)
 {
-	char	*str;
-
-	str = NULL;
+	active->first_malloc = 1;
 	if (active->converter == 'd')
-		str = ft_itoa_base(va_arg(args, int), 10);
-	return (str);
+		return (ft_itoa_base(va_arg(args, int), 10));
+	else if (active->converter == 'b')
+		return (ft_binary_complete(ft_itoa_base_uint(va_arg(args, int), 2)));
+	else if (active->converter == 'o')
+		return (ft_itoa_base((va_arg(args, int)), 8));
+	else if (active->converter == 'u')
+		return (ft_itoa_base(va_arg(args, int), 10));
+	else if (active->converter == 'X')
+		return (ft_strtoupper(ft_itoa_base_uint(va_arg(args, int), 16)));
+	return (ft_itoa_base_uint(va_arg(args, int), 16));
 }
 
 int		conv_int(char type, t_flag *active, va_list args)
 {
-	intmax_t s_int;
-	uintmax_t u_int;
-	int		len;
-	char	*str;
+	intmax_t	s_int;
+	int			len;
+	char		*str;
 
 	active->converter = type;
 	s_int = 0;
-	u_int = 0;
 	if (check_size(active) && ft_strchr("di", active->converter))
 	{
 		s_int = signed_cast(args, active);
@@ -75,12 +81,12 @@ int		conv_int(char type, t_flag *active, va_list args)
 			str = "-9223372036854775808";
 		else
 		{
-			active->malloc = 1;
+			active->first_malloc = 1;
 			str = ft_itoa_base(s_int, 10);
 		}
 	}
 	else if (check_size(active) && ft_strchr("ouxX", active->converter))
-		str = unsigned_oux_int(args, u_int, active);
+		str = unsigned_oux_int(args, active);
 	else
 		str = unsigned_int(args, active);
 	len = ft_strlen(str);

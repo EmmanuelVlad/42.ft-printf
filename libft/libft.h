@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:31:07 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/27 18:36:33 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 19:11:15 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char				*ft_itoa_base(intmax_t value, int base);
 char				*ft_itoa_base_uint(uintmax_t value, int base);
 char				*ft_strtoupper(char *str);
 char				*ft_strtolower(char *str);
+char				*ft_binary_complete(char *str);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);

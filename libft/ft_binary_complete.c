@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   ft_binary_complete.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/27 15:43:01 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 20:40:33 by evlad            ###   ########.fr       */
+/*   Created: 2017/03/30 19:04:38 by evlad             #+#    #+#             */
+/*   Updated: 2017/03/30 19:15:22 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "libft.h"
 
-t_flag		*init_flag(void)
+char	*ft_binary_complete(char *str)
 {
-	t_flag	*flag;
+	char	*newstr;
+	int		i;
+	size_t	len;
 
-	flag = (t_flag*)malloc(sizeof(t_flag));
-	flag->diese = 0;
-	flag->zero = 0;
-	flag->minus = 0;
-	flag->plus = 0;
-	flag->width = 0;
-	flag->precision = -1;
-	flag->space = 0;
-	flag->l = 0;
-	flag->ll = 0;
-	flag->h = 0;
-	flag->hh = 0;
-	flag->j = 0;
-	flag->z = 0;
-	flag->first_malloc = 0;
-	flag->second_malloc = 0;
-	return (flag);
+	i = 0;
+	len = ft_strlen(str);
+	if (len < 4)
+	{
+		newstr = ft_strnew(4);
+		ft_strcpy(newstr + (4 - len), str);
+		free(str);
+		while ((4 - len) > i)
+		{
+			newstr[i] = '0';
+			i++;
+		}
+	}
+	else
+		newstr = str;
+	return (newstr);
 }

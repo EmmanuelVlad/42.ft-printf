@@ -6,12 +6,11 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:02:05 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/27 18:09:37 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 21:03:48 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
 
 char	*apply_space(char *buffer, t_flag *active)
 {
@@ -22,7 +21,7 @@ char	*apply_space(char *buffer, t_flag *active)
 	str = ft_strnew(ft_strlen(buffer) + 1);
 	str[0] = ' ';
 	ft_strcpy(str + 1, buffer);
-	free(buffer);
+	freemalloc(buffer, active, 1);
 	return (str);
 }
 
@@ -43,5 +42,6 @@ char	*apply_minus(char *buffer, t_flag *active)
 	while (j++ < (active->width - (int)ft_strlen(buffer)))
 		str[i++] = ' ';
 	str[i] = '\0';
+	freemalloc(buffer, active, 1);
 	return (str);
 }

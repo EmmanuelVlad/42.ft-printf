@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:13:17 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/23 17:48:24 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 21:04:13 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*apply_precision_negative(char *buffer, int length, t_flag *active)
 		str[i++] = '0';
 	str[0] = '-';
 	ft_strcpy(str + i, buffer + 1);
-	free(buffer);
+	freemalloc(buffer, active, 1);
 	return (str);
 }
 
@@ -35,6 +35,8 @@ char	*apply_precision_2(char *buffer, int length, t_flag *active)
 	int		i;
 	int		j;
 
+	if (active->converter == 'b')
+		return (buffer);
 	if (ft_atoi(buffer) < 0)
 		return (apply_precision_negative(buffer, length, active));
 	str = ft_strnew(active->precision + 1);
@@ -45,15 +47,17 @@ char	*apply_precision_2(char *buffer, int length, t_flag *active)
 	while (buffer[j])
 		str[i++] = buffer[j++];
 	str[i] = '\0';
-	if (active->converter != 's')
-		free(buffer);
+	freemalloc(buffer, active, 1);
 	return (str);
 }
 
 char	*apply_precision(char *buffer, int length, t_flag *active)
 {
 	if (length >= active->precision && active->converter == 's')
+	{
+		active->second_malloc = 1;
 		return (ft_strsub(buffer, 0, active->precision));
+	}
 	else if (length >= active->precision && active->converter == 'S')
 		return (0);
 	else if (length >= active->precision)

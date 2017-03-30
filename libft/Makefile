@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/03/27 18:36:08 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/30 19:11:29 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ LIST = ft_memset.c \
 	   ft_countletter.c \
 	   ft_countsletter.c \
 	   ft_strtoupper.c \
-	   ft_strtolower.c
+	   ft_strtolower.c \
+	   ft_binary_complete.c
 
 OBJ = $(LIST:%.c=%.o)
 

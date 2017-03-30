@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/15 11:03:58 by evlad             #+#    #+#              #
-#    Updated: 2017/03/30 12:23:25 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/30 21:05:00 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CFILES = ft_printf.c \
 		 conv_1.c \
 		 conv_2.c \
 		 cast.c \
+		 freemalloc.c \
 		 main.c
 
 FLAGS = -g -Wextra -Werror -Wall 

@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:32:48 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 12:22:20 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 21:43:37 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 int		main(void)
 {
-	char	*str;
-	char	*str2;
-	int		nbr;
+	char	str[] = "printf from scrap!";
+	ft_printf("FT_PRINTF:'%#14.3hhX'", (unsigned char)50);
+	printf("\n   PRINTF:'%#14.3hhX'\n\n", (unsigned char)50);
+	
+	ft_printf("FT_PRINTF:'%0.8x'", 67);
+	printf("\n   PRINTF:'%0.8x\n\n", 67);
 
-	str = "J'adore tester printf";
-	str2 = "test";
-	nbr = -1337;
+	ft_printf("FT_PRINTF:'%p'", (void*)str);
+	printf("\n   PRINTF:'%p'\n\n", (void*)str);
 
-/*
-	ft_printf("FT_PRINTF:'%14.3d' '%7.15s' '%10%' lol wtf", 1337, str2);
-	printf("\n   PRINTF:'%14.3d' '%7.15s' '%+10%' lol wtf\n", 1337, str2);
-	ft_printf("\nFT_PRINTF:'%+-15.9d' '%10s' %+10% lol wtf\n", nbr, str2);
-	printf("   PRINTF:'%+-15.9d' '%10s' %+10% lol wtf\n", nbr, str2);
-*/
-	ft_printf("FT_PRINTF:'%14.3llX'", (long long int)13370000000000);
-	printf("\n   PRINTF:'%14.3llX'", (long long int)13370000000000);
+	ft_printf("FT_PRINTF:'%18p'", (void*)str);
+	printf("\n   PRINTF:'%18p'\n\n", (void*)str);
 
+	ft_printf("FT_PRINTF:'%lld'", (long long int)-9223372036854775807 - 1);
+	printf("\n   PRINTF:'%lld'\n\n", (long long int)-9223372036854775807 - 1);
 	return (0);
 }

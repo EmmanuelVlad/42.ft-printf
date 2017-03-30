@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:26:07 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 12:20:59 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 21:41:25 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char			*ft_itoa_base_uint(uintmax_t value, int base)
 
 	len = count(value, base);
 	str = ft_strnew(len + 1);
-	str[len] = '\0';
 	if (value == 0)
 		str[--len] = '0';
 	while (value != 0)
