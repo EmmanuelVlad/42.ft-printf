@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:12:39 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/27 18:24:34 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 11:50:34 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ intmax_t	signed_cast(va_list args, t_flag *active)
 {
 	intmax_t nb;
 
-	if (active->l)
-		nb = (short)va_arg(args, int);
-	if (active->ll)
-		nb = (char)va_arg(args, int);
 	if (active->h)
-		nb = va_arg(args, long int);
+		nb = (short)va_arg(args, int);
 	if (active->hh)
+		nb = (char)va_arg(args, int);
+	if (active->l)
+		nb = va_arg(args, long int);
+	if (active->ll)
 		nb = va_arg(args, long long int);
 	if (active->j)
 		nb = va_arg(args, intmax_t);
@@ -35,13 +35,13 @@ uintmax_t	unsigned_cast(va_list args, t_flag *active)
 {
 	uintmax_t nb;
 
-	if (active->l)
-		nb = (unsigned short)va_arg(args, unsigned int);
-	if (active->ll)
-		nb = (unsigned char)va_arg(args, unsigned int);
 	if (active->h)
-		nb = va_arg(args, unsigned long int);
+		nb = (unsigned short)va_arg(args, unsigned int);
 	if (active->hh)
+		nb = (unsigned char)va_arg(args, unsigned int);
+	if (active->l)
+		nb = va_arg(args, unsigned long int);
+	if (active->ll)
 		nb = va_arg(args, unsigned long long int);
 	if (active->j)
 		nb = va_arg(args, uintmax_t);

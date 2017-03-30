@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:32:48 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/27 18:38:39 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 12:22:20 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		main(void)
 	ft_printf("\nFT_PRINTF:'%+-15.9d' '%10s' %+10% lol wtf\n", nbr, str2);
 	printf("   PRINTF:'%+-15.9d' '%10s' %+10% lol wtf\n", nbr, str2);
 */
-	ft_printf("FT_PRINTF:'%14.3hu'", (short)1337);
-	printf("\n   PRINTF:'%14.3hu'", (short)1337);
+	ft_printf("FT_PRINTF:'%14.3llX'", (long long int)13370000000000);
+	printf("\n   PRINTF:'%14.3llX'", (long long int)13370000000000);
 
 	return (0);
 }

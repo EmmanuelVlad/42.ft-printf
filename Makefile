@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/15 11:03:58 by evlad             #+#    #+#              #
-#    Updated: 2017/03/27 18:09:51 by evlad            ###   ########.fr        #
+#    Updated: 2017/03/30 12:23:25 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,6 @@ $(NAME):
 	@echo -n '-> Compilating'
 	@make -C ./libft/
 	@echo -n '.'
-	@mkdir -p $(OBJ_FILE)
 	@gcc -c $(FLAGS) $(CFILES)
 	@echo -n '.'
 	@gcc -L ./ -lftprintf $(OBJ) -o $(NAME)

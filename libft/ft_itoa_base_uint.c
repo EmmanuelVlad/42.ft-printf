@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:26:07 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/27 18:31:41 by evlad            ###   ########.fr       */
+/*   Updated: 2017/03/30 12:20:59 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char			*ft_itoa_base_uint(uintmax_t value, int base)
 		str[--len] = '0';
 	while (value != 0)
 	{
-		str[--len] = rep[value % 10];
-		value /= 10;
+		str[--len] = rep[value % base];
+		value /= base;
 	}
 	return (str);
 }
