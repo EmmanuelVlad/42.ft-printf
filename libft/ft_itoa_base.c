@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:26:07 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 20:50:14 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/01 03:58:33 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ char			*ft_itoa_base(intmax_t value, int base)
 		value *= -1;
 	}
 	if (value == 0)
-		str[len--] = '0';
+		str[--len] = '0';
 	while (value != 0)
 	{
-		str[len--] = rep[value % 10];
+		str[--len] = rep[value % 10];
 		value /= 10;
 	}
 	if (sign == -1 && base == 10)
