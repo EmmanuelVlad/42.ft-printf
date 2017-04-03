@@ -6,13 +6,13 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/01 04:15:44 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/03 18:51:52 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "printf.h"
 
-int		conv(char type, t_flag *active, va_list args)
+int		conv(char type, t_flag *active, va_list args, t_length *len)
 {
 	int					i;
 	static const t_conv	g_conv[] = {
@@ -29,7 +29,7 @@ int		conv(char type, t_flag *active, va_list args)
 	while (i < 7)
 	{
 		if (ft_strchr(g_conv[i].type, type))
-			return (g_conv[i].function(type, active, args));
+			return (g_conv[i].function(type, active, args, len));
 		i++;
 	}
 	return (0);
@@ -66,10 +66,10 @@ char	*other_int(va_list args, t_flag *active)
 	return (ft_itoa_base(va_arg(args, int), 10));
 }
 
-int		conv_int(char type, t_flag *active, va_list args)
+int		conv_int(char type, t_flag *active, va_list args, t_length *len)
 {
 	intmax_t	s_int;
-	int			len;
+	int			length;
 	char		*str;
 
 	active->converter = type;
@@ -89,21 +89,23 @@ int		conv_int(char type, t_flag *active, va_list args)
 		str = sized_oux_int(args, active);
 	else
 		str = other_int(args, active);
-	len = ft_strlen(str);
-	apply_flags(str, len, active);
-	return (len);
+	length = ft_strlen(str);
+	apply_flags(str, length, active, len);
+	return (length);
 }
 
-int		conv_s(char type, t_flag *active, va_list args)
+int		conv_s(char type, t_flag *active, va_list args, t_length *len)
 {
 	char	*str;
-	int		len;
+	int		length;
 
 	str = va_arg(args, char*);
-	len = ft_strlen(str);
+	if (str == NULL)
+		str = "(null)"; 
+	length = ft_strlen(str);
 	active->converter = type;
-	apply_flags(str, len, active);
-	if (len == 0)
+	apply_flags(str, length, active, len);
+	if (length == 0)
 		return (1);
-	return (len);
+	return (length);
 }

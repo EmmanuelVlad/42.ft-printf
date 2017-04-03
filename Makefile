@@ -5,69 +5,142 @@
 #                                                     +:+ +:+         +:+      #
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/15 11:03:58 by evlad             #+#    #+#              #
-#    Updated: 2017/03/30 21:05:00 by evlad            ###   ########.fr        #
+#    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
+#    Updated: 2017/04/03 18:47:13 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFILES = ft_printf.c \
-		 init_struct.c \
-		 formating.c \
-		 check_flags.c \
-		 apply_flags.c \
-		 apply_flags_2.c \
-		 apply_flags_3.c \
-		 apply_precision.c \
-		 conv_1.c \
-		 conv_2.c \
-		 cast.c \
-		 freemalloc.c \
-		 main.c
+LIST = ft_memset.c \
+	   ft_bzero.c \
+	   ft_memcpy.c \
+	   ft_memccpy.c \
+	   ft_memmove.c \
+	   ft_memchr.c \
+	   ft_memcmp.c \
+	   ft_strlen.c \
+	   ft_strdup.c \
+	   ft_strcpy.c \
+	   ft_strncpy.c \
+	   ft_strcat.c \
+	   ft_strncat.c \
+	   ft_strlcat.c \
+	   ft_strchr.c \
+	   ft_strrchr.c \
+	   ft_strstr.c \
+	   ft_strnstr.c \
+	   ft_strcmp.c \
+	   ft_strncmp.c \
+	   ft_atoi.c \
+	   ft_isalpha.c \
+	   ft_isdigit.c \
+	   ft_isalnum.c \
+	   ft_isascii.c \
+	   ft_isprint.c \
+	   ft_itoa.c \
+	   ft_itoa_base.c \
+	   ft_itoa_base_uint.c \
+	   ft_toupper.c \
+	   ft_tolower.c \
+	   ft_memalloc.c \
+	   ft_memdel.c \
+	   ft_strnew.c \
+	   ft_strdel.c \
+	   ft_strclr.c \
+	   ft_striter.c \
+	   ft_striteri.c \
+	   ft_strmap.c \
+	   ft_strmapi.c \
+	   ft_strequ.c \
+	   ft_strnequ.c \
+	   ft_strsub.c \
+	   ft_strjoin.c \
+	   ft_strtrim.c \
+	   ft_strsplit.c \
+	   ft_putchar.c \
+	   ft_putstr.c \
+	   ft_putendl.c \
+	   ft_putnbr.c \
+	   ft_putchar_fd.c \
+	   ft_putstr_fd.c \
+	   ft_putendl_fd.c \
+	   ft_putnbr_fd.c \
+	   ft_countword.c \
+	   ft_countsword.c \
+	   ft_countletter.c \
+	   ft_countsletter.c \
+	   ft_strtoupper.c \
+	   ft_strtolower.c \
+	   ft_binary_complete.c \
 
-FLAGS = -g -Wextra -Werror -Wall 
+LIBFT_PATH = $(OBJ_PATH)libft/
 
-NAME = printf
+LIBFT_FILES = $(LIST:%=./libft/%)
 
-INC = header.h
+LIBFT_OBJ = $(LIST:%.c=%.o)
 
-OK = "	\033[1;32m[OK]\033[0m"
+LIBFT = $(LIBFT_OBJ:%=$(LIBFT_PATH)%)
 
-OBJ_FILE = "obj"
+PRINTF_LIST = ft_printf.c \
+			  init_struct.c \
+			  formating.c \
+			  check_flags.c \
+			  apply_flags.c \
+			  apply_flags_2.c \
+			  apply_precision.c \
+			  apply_zero.c \
+			  conv_1.c \
+			  conv_2.c \
+			  cast.c \
+			  freemalloc.c \
+			  main.c
 
-OBJ = $(CFILES:%.c=%.o)
+PRINTF_PATH = $(OBJ_PATH)printf/
 
-#OBJ_PATH = ./obj/
-#OBJ_FILE = $(CFILES:%.c=%.o)
-#OBJ = $(OBJ_FILE:%=$(OBJ_PATH)%)
+PRINTF_FILES = $(PRINTF_LIST:%=./printf/%)
 
-#$(OBJ_PATH)%.o: %.c $(INC)
-#	@mkdir -p $(OBJ_PATH)
-#	@gcc $(FLAGS) -o $@ -c $<
+PRINTF_OBJ = $(PRINTF_LIST:%.c=%.o)
+
+PRINTF = $(PRINTF_OBJ:%=$(PRINTF_PATH)%)
+
+OBJ_PATH = ./obj/
+
+FLAGS = -Wextra -Werror -Wall
+
+NAME = libftprintf.a
+
+OK = "\033[1;32m[OK]\033[0m"
+
+$(LIBFT_PATH)%.o: $(LIBFT_FILES) ./libft/libft.h ./printf/printf.h
+	@mkdir -p $(OBJ_PATH)
+	@mkdir -p $(LIBFT_PATH)
+	@gcc -c ./libft/$(@F:%.o=%.c) -o $@
+
+
+$(PRINTF_PATH)%.o: $(PRINTF_FILES) ./printf/printf.h ./libft/libft.h
+	@mkdir -p $(OBJ_PATH)
+	@mkdir -p $(PRINTF_PATH)
+	@gcc -c ./printf/$(@F:%.o=%.c) -o $@
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(LIBFT) $(PRINTF)
 	@echo -n '-> Compilating'
-	@make -C ./libft/
 	@echo -n '.'
-	@gcc -c $(FLAGS) $(CFILES)
+	@gcc $(FLAGS) $(LIBFT) $(PRINTF)
+	@ar rc $(NAME) $(LIBFT) $(PRINTF)
 	@echo -n '.'
-	@gcc -L ./ -lftprintf $(OBJ) -o $(NAME)
-	@echo -n '.	'
+	@ranlib $(NAME)
+	@echo -n '.		'
 	@echo $(OK)
-
+	
 clean:
-	@echo -n '-> Deleting object files...'
-	@/bin/rm -f $(OBJ)
-	@make -C ./libft/ clean
+	@echo -n '-> Deleting object files...	'
+	@/bin/rm -rf $(OBJ_PATH)
 	@echo $(OK)
 
 fclean: clean
-	@echo -n '-> Deleting executable file...'
+	@echo -n '-> Deleting executable file...	'
 	@/bin/rm -f $(NAME)
-	@make -C ./libft/ fclean
 	@echo $(OK)
 
 re: fclean all
-
-.PHONY: all clean fclean re

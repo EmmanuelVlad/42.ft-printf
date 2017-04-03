@@ -6,11 +6,11 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:02:24 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 21:24:09 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/03 18:51:56 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "printf.h"
 
 char	*apply_diese(char *buffer, t_flag *active)
 {
@@ -24,7 +24,8 @@ char	*apply_diese(char *buffer, t_flag *active)
 		ft_strcpy(str + 1, buffer);
 		freemalloc(buffer, active, 1);
 	}
-	else if (active->converter == 'X' || active->converter == 'x')
+	else if ((active->converter == 'X' || active->converter == 'x')
+			&& ft_atoi(buffer) != 0)
 	{
 		str = ft_strnew(ft_strlen(buffer) + 2);
 		str[0] = '0';
@@ -37,19 +38,12 @@ char	*apply_diese(char *buffer, t_flag *active)
 	return (str);
 }
 
-int		apply_zero(t_flag *active)
-{
-	if (active->converter)
-		;
-	return (0);
-}
-
 char	*apply_plus(char *buffer, t_flag *active)
 {
 	char	*str;
 
 	str = NULL;
-	if (ft_strchr("bdiD", active->converter) && ft_atoi(buffer) > 0)
+	if (ft_strchr("bdiD", active->converter) && ft_atoi(buffer) >= 0)
 	{
 		str = ft_strnew(ft_strlen(buffer) + 1);
 		ft_strcpy(str + 1, buffer);
@@ -75,6 +69,27 @@ char	*apply_width(char *buffer, t_flag *active)
 	while (i < (active->width - (int)ft_strlen(buffer)))
 		str[i++] = ' ';
 	ft_strcpy(str + i, buffer);
+	freemalloc(buffer, active, 1);
+	return (str);
+}
+
+char	*apply_minus(char *buffer, t_flag *active)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	if ((int)ft_strlen(buffer) >= active->width)
+		return (buffer);
+	str = ft_strnew(active->width + 1);
+	while (j < (int)ft_strlen(buffer))
+		str[i++] = buffer[j++];
+	j = 0;
+	while (j++ < (active->width - (int)ft_strlen(buffer)))
+		str[i++] = ' ';
+	str[i] = '\0';
 	freemalloc(buffer, active, 1);
 	return (str);
 }

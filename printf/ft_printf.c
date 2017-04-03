@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freemalloc.c                                       :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/30 20:57:14 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 21:07:36 by evlad            ###   ########.fr       */
+/*   Created: 2016/12/20 08:33:26 by evlad             #+#    #+#             */
+/*   Updated: 2017/04/03 17:39:02 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "printf.h"
 
-void	freemalloc(char *buffer, t_flag *active, int realloc)
+int		ft_printf(const char *restrict format, ...)
 {
-	if (active->first_malloc || active->second_malloc)
+	int			i;
+	t_length	*len;
+	va_list		args;
+
+	i = 0;
+	len = init_length();
+	va_start(args, format);
+	while (format[i])
 	{
-		active->first_malloc = 0;
-		active->second_malloc = 0;
-		free(buffer);
+		if (format[i] == '%')
+			i += formating(format + i, args, len);
+		else
+		{
+			write(1, &(format[i]), 1);
+			len->len++;
+		}
+		i++;
 	}
-	if (realloc)
-		active->second_malloc = 1;
+	i = len->len;
+	free(len);
+	va_end(args);
+	return (i);
 }

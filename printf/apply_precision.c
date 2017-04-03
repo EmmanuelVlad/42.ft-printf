@@ -6,11 +6,11 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:13:17 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 21:04:13 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/03 19:12:53 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "printf.h"
 
 char	*apply_precision_negative(char *buffer, int length, t_flag *active)
 {
@@ -33,7 +33,6 @@ char	*apply_precision_2(char *buffer, int length, t_flag *active)
 {
 	char	*str;
 	int		i;
-	int		j;
 
 	if (active->converter == 'b')
 		return (buffer);
@@ -41,12 +40,9 @@ char	*apply_precision_2(char *buffer, int length, t_flag *active)
 		return (apply_precision_negative(buffer, length, active));
 	str = ft_strnew(active->precision + 1);
 	i = 0;
-	j = 0;
 	while ((i < (active->precision - length)) && active->converter != 's')
 		str[i++] = '0';
-	while (buffer[j])
-		str[i++] = buffer[j++];
-	str[i] = '\0';
+	ft_strcpy(str + i, buffer);
 	freemalloc(buffer, active, 1);
 	return (str);
 }

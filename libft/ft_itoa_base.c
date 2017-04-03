@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:26:07 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/01 03:58:33 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/03 19:04:46 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ static	int		count(intmax_t value, int base)
 	int		len;
 
 	len = 0;
-	if (value == 0)
+	if (value <= 0)
+	{
 		len = 1;
+		value *= -1;
+	}
 	while (value != 0)
 	{
-		len++;
 		value /= base;
+		len++;
 	}
 	return (len);
 }
@@ -33,25 +36,22 @@ char			*ft_itoa_base(intmax_t value, int base)
 	static char	rep[] = "0123456789abcdef";
 	char		*str;
 	int			len;
-	int			sign;
+	intmax_t	dup;
 
-	sign = 1;
+	dup = value;
 	len = count(value, base);
 	str = ft_strnew(len);
 	str[len] = '\0';
 	if (value < 0 && base == 10)
-	{
-		sign = -1;
 		value *= -1;
-	}
 	if (value == 0)
 		str[--len] = '0';
 	while (value != 0)
 	{
-		str[--len] = rep[value % 10];
+		str[--len] = rep[value % base];
 		value /= 10;
 	}
-	if (sign == -1 && base == 10)
-		str[len] = '-';
+	if (dup < 0 && base == 10)
+		str[--len] = '-';
 	return (str);
 }

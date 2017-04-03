@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/03/30 19:11:29 by evlad            ###   ########.fr        #
+#    Updated: 2017/04/03 14:40:22 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,27 +70,65 @@ LIST = ft_memset.c \
 	   ft_countsletter.c \
 	   ft_strtoupper.c \
 	   ft_strtolower.c \
-	   ft_binary_complete.c
+	   ft_binary_complete.c \
 
-OBJ = $(LIST:%.c=%.o)
+LIBFT_FILES = $(LIST:%=./libft/%)
+
+LIBFT_OBJ = $(LIST:%.c=$(OBJ_PATH)libft/%.o)
+
+LIBFT = $(LIBFT_OBJ:%=$(OBJ_PATH)%)
+
+PRINTF_LIST = ft_printf.c \
+			  init_struct.c \
+			  formating.c \
+			  check_flags.c \
+			  apply_flags.c \
+			  apply_flags_2.c \
+			  apply_flags_3.c \
+			  apply_precision.c \
+			  conv_1.c \
+			  conv_2.c \
+			  cast.c \
+			  freemalloc.c \
+
+PRINTF_FILES = $(PRINTF_LIST:%=./printf/%)
+
+PRINTF_OBJ = $(PRINTF_LIST:%.c=$(OBJ_PATH)printf/%.o)
+
+PRINTF = $(PRINTF_OBJ:%=$(OBJ_PATH)%)
+
+OBJ_PATH = ./obj/
 
 FLAGS = -Wextra -Werror -Wall
 
 NAME = libftprintf.a
 
+OK = "\033[1;32m[OK]\033[0m"
+
 all: $(NAME)
 
 $(NAME):
-	@gcc -c $(LIST)
-	@ar rc ../$(NAME) $(OBJ)
-	@ranlib ../$(NAME)
+	@echo -n '-> Compilating'
+	@mkdir -p $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)libft
+	@mkdir -p $(OBJ_PATH)printf
+	@gcc -c $(LIBFT_FILES) -o $(OBJ_PATH)libft
+	@gcc -c $(PRINTF_FILES) -o $(OBJ_PATH)printf
+	@echo -n '.'
+	@ar rc $(NAME) $(LIBFT_OBJ) $(PRINTF_OBJ)
+	@echo -n '.'
+	@ranlib .$(NAME)
+	@echo -n '.		'
+	@echo $(OK)
 	
 clean:
-	@/bin/rm -f $(OBJ)
+	@echo -n '-> Deleting object files...'
+	@/bin/rm -rf $(OBJ_PATH)
+	@echo $(OK)
 
 fclean: clean
-	@/bin/rm -f ../$(NAME)
+	@echo -n '-> Deleting executable file...'
+	@/bin/rm -f $(NAME)
+	@echo $(OK)
 
 re: fclean all
-
-.PHONY: all clean fclean re

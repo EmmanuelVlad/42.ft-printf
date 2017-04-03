@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 08:21:45 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 21:01:28 by evlad            ###   ########.fr       */
+/*   Created: 2017/04/03 15:34:55 by evlad             #+#    #+#             */
+/*   Updated: 2017/04/03 17:39:56 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#ifndef PRINTF_H
+# define PRINTF_H
 
 /*
 ** --------------------------------------------------------------------------
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 /*
 ** --------------------------------------------------------------------------
@@ -47,15 +47,22 @@ typedef struct		s_flag
 	int				j;
 	int				z;
 	char			converter;
+	int				length;
 
 	int				first_malloc;
 	int				second_malloc;
 }					t_flag;
 
+typedef struct		s_length
+{
+	int				len;
+}					t_length;
+
 typedef struct		s_conv
 {
 	char			*type;
-	int				(*function)(char type, t_flag *active, va_list args);
+	int				(*function)(char type, t_flag *active, va_list args,
+						t_length *len);
 }					t_conv;
 
 /*
@@ -65,7 +72,7 @@ typedef struct		s_conv
 */
 
 int					ft_printf(const char *format, ...);
-int					formating(const char *format, va_list args);
+int					formating(const char *format, va_list args, t_length *len);
 
 int					check_size(t_flag *active);
 intmax_t			signed_cast(va_list args, t_flag *active);
@@ -80,11 +87,13 @@ void				freemalloc(char *buffer, t_flag *active, int realloc);
 */
 
 t_flag				*init_flag(void);
+t_length			*init_length(void);
 int					check_flags(const char *flag, t_flag *active);
-void				apply_flags(char *buffer, int length, t_flag *active);
+void				apply_flags(char *buffer, int length, t_flag *active,
+						t_length *len);
 
 char				*apply_diese(char *buffer, t_flag *active);
-int					apply_zero(t_flag *active);
+char				*apply_zero(char *buffer, t_flag *active);
 char				*apply_plus(char *buffer, t_flag *active);
 char				*apply_width(char *buffer, t_flag *active);
 char				*apply_space(char *buffer, t_flag *active);
@@ -98,13 +107,20 @@ char				*apply_minus(char *buffer, t_flag *active);
 ** --------------------------------------------------------------------------
 */
 
-int					conv(char type, t_flag *active, va_list args);
-int					conv_int(char type, t_flag *active, va_list args);
-int					conv_dou(char type, t_flag *active, va_list args);
-int					conv_c(char type, t_flag *active, va_list args);
-int					conv_s(char type, t_flag *active, va_list args);
-int					conv_ws(char type, t_flag *active, va_list args);
-int					conv_p(char type, t_flag *active, va_list args);
-int					conv_pct(char type, t_flag *active, va_list args);
+int					conv(char type, t_flag *active, va_list args, t_length *len);
+int					conv_int(char type, t_flag *active, va_list args, 
+						t_length *len);
+int					conv_dou(char type, t_flag *active, va_list args, 
+						t_length *len);
+int					conv_c(char type, t_flag *active, va_list args,
+						t_length *len);
+int					conv_s(char type, t_flag *active, va_list args,
+						t_length *len);
+int					conv_ws(char type, t_flag *active, va_list args,
+						t_length *len);
+int					conv_p(char type, t_flag *active, va_list args,
+						t_length *len);
+int					conv_pct(char type, t_flag *active, va_list args,
+						t_length *len);
 
 #endif

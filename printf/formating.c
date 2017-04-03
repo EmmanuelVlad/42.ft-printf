@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   formating.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/27 15:43:01 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 20:40:33 by evlad            ###   ########.fr       */
+/*   Created: 2016/12/21 08:14:34 by evlad             #+#    #+#             */
+/*   Updated: 2017/04/03 17:31:57 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "printf.h"
 
-t_flag		*init_flag(void)
+int		formating(const char *restrict format, va_list args, t_length *len)
 {
-	t_flag	*flag;
+	t_flag	*active;
+	int		i;
 
-	flag = (t_flag*)malloc(sizeof(t_flag));
-	flag->diese = 0;
-	flag->zero = 0;
-	flag->minus = 0;
-	flag->plus = 0;
-	flag->width = 0;
-	flag->precision = -1;
-	flag->space = 0;
-	flag->l = 0;
-	flag->ll = 0;
-	flag->h = 0;
-	flag->hh = 0;
-	flag->j = 0;
-	flag->z = 0;
-	flag->first_malloc = 0;
-	flag->second_malloc = 0;
-	return (flag);
+	active = init_flag();
+	i = 1;
+	while (conv(format[i], active, args, len) == 0)
+		i += 1 + check_flags(format + i, active);
+	free(active);
+	return (i);
 }

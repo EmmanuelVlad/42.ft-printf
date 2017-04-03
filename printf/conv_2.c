@@ -6,13 +6,13 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 21:45:03 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/03 17:37:38 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "printf.h"
 
-int		conv_dou(char type, t_flag *active, va_list args)
+int		conv_dou(char type, t_flag *active, va_list args, t_length *len)
 {
 	if (type == 'D')
 		type = 'd';
@@ -20,10 +20,10 @@ int		conv_dou(char type, t_flag *active, va_list args)
 		type = 'o';
 	else if (type == 'U')
 		type = 'u';
-	return (conv_int(type, active, args));
+	return (conv_int(type, active, args, len));
 }
 
-int		conv_c(char type, t_flag *active, va_list args)
+int		conv_c(char type, t_flag *active, va_list args, t_length *len)
 {
 	char	*str;
 
@@ -32,18 +32,18 @@ int		conv_c(char type, t_flag *active, va_list args)
 	str[0] = (unsigned char)va_arg(args, int);
 	str[1] = '\0';
 	active->converter = type;
-	apply_flags(str, 1, active);
+	apply_flags(str, 1, active, len);
 	return (1);
 }
 
-int		conv_ws(char type, t_flag *active, va_list args)
+int		conv_ws(char type, t_flag *active, va_list args, t_length *len)
 {
 	if (type && active && args)
 		return (1);
 	return (0);
 }
 
-int		conv_p(char type, t_flag *active, va_list args)
+int		conv_p(char type, t_flag *active, va_list args, t_length *len)
 {
 	void		*ptr;
 	uintptr_t	ptrint;
@@ -59,14 +59,15 @@ int		conv_p(char type, t_flag *active, va_list args)
 	free(address);
 	active->converter = type;
 	active->first_malloc = 1;
-	apply_flags(str, ft_strlen(str), active);
+	apply_flags(str, ft_strlen(str), active, len);
 	return (1);
 }
 
-int		conv_pct(char type, t_flag *active, va_list args)
+int		conv_pct(char type, t_flag *active, va_list args, t_length *len)
 {
 	(void)type;
 	(void)args;
-	apply_flags("%\0", 1, active);
+	active->converter = '%';
+	apply_flags("%\0", 1, active, len);
 	return (1);
 }

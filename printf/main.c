@@ -6,11 +6,11 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:32:48 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/01 04:15:57 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/03 19:22:04 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "printf.h"
 
 int		main(void)
 {
@@ -32,6 +32,26 @@ int		main(void)
 
 	ft_printf("FT_PRINTF: '%O'", -1337);
 	printf("\n   PRINTF: '%O'\n\n", -1337);
+	
+	ft_printf("FT_PRINTF: '%   %'");
+	printf("\n   PRINTF: '%   %'\n\n");
+
+	ft_printf("FT_PRINTF: '%010x'", 542);
+	printf("\n   PRINTF: '%010x'\n\n", 542);
+
+	ft_printf("FT_PRINTF: '%#x'", 0);
+	printf("\n   PRINTF: '%#x'\n\n", 0);
+
+	ft_printf("FT_PRINTF: '%s'", NULL);
+	printf("\n   PRINTF: '%s'\n\n", NULL);
+	
+	ft_printf("FT_PRINTF: '%5.o' '%5.0o'", 0, 0);
+	printf("\n   PRINTF: '%5.o' '%5.0o'", 0, 0);
+	
+	printf("\n   PRINTF: %s", ft_itoa_base_uint(0, 8));
+
+//	ft_printf("FT_PRINTF: '%#08x'", 42);
+	printf("\n   PRINTF: '%#08x'\n\n", 42);
 
 	ft_printf("BONUS (BINARY): '%b'", 1337);
 	return (0);
