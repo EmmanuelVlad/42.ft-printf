@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 18:34:53 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:17:40 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 21:09:58 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*apply_flags_2(char *buffer, int length, t_flag *active)
 		freemalloc(buffer, active, 0);
 		return ("0");
 	}
-	if (active->precision != -1)
+	if (active->precision != -1 && active->converter != '%')
 		buffer = apply_precision(buffer, length, active);
 	if (active->space)
 		buffer = apply_space(buffer, active);
@@ -57,9 +57,9 @@ void	apply_flags(char *buffer, int length, t_flag *active, t_length *len)
 	ft_putstr(buffer);
 	if (active->converter == 'c')
 	{
-		len->len = 1;
+		len->len += 1;
 		if (active->width)
-			len->len = active->width;
+			len->len += active->width - 1;
 		if (buffer == '\0')
 			len->len -= 1;
 	}

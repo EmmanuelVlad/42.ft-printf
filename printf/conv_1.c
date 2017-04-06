@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 19:21:50 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 21:15:20 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ char	*other_int(va_list args, t_flag *active)
 	else if (active->converter == 'x')
 		return (ft_itoa_base_uint(va_arg(args, unsigned int), 16));
 	else if (active->converter == 'X')
-		return (ft_strtoupper(ft_itoa_base_uint(va_arg(args, unsigned int), 16)));
+	{
+		return (ft_strtoupper(
+					ft_itoa_base_uint(va_arg(args, unsigned int), 16)));
+	}
 	return (ft_itoa_base(va_arg(args, int), 10));
 }
 
@@ -101,7 +104,7 @@ int		conv_s(char type, t_flag *active, va_list args, t_length *len)
 
 	str = va_arg(args, char*);
 	if (str == NULL)
-		str = "(null)"; 
+		str = "(null)";
 	length = ft_strlen(str);
 	active->converter = type;
 	apply_flags(str, length, active, len);

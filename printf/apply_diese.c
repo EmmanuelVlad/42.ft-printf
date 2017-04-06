@@ -6,13 +6,13 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:27:44 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 18:50:00 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 21:11:30 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char	*apply_diese_x(char *buffer, t_flag	 *active)
+char	*apply_diese_x(char *buffer, t_flag *active)
 {
 	char	*str;
 
@@ -53,7 +53,7 @@ char	*apply_diese(char *buffer, t_flag *active)
 {
 	int		i;
 
-	i = 0;			
+	i = 0;
 	if (ft_strchr("csdiupUCDS%", active->converter) || ft_atoi(buffer) == 0)
 		return (buffer);
 	else if (active->converter == 'o' && !active->hh)

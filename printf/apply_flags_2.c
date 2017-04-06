@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:02:24 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:11:40 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:21:35 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ char	*apply_width(char *buffer, t_flag *active)
 {
 	int		i;
 	char	*str;
+	int		len;
 
 	i = 0;
-	if ((int)ft_strlen(buffer) >= active->width)
+	len = ft_strlen(buffer);
+	if (active->converter == 'c')
+		len = 1;
+	if (len >= active->width)
 		return (buffer);
 	str = ft_strnew(active->width + 1);
-	while (i < (active->width - (int)ft_strlen(buffer)))
+	while (i < (active->width - len))
 		str[i++] = ' ';
 	ft_strcpy(str + i, buffer);
 	freemalloc(buffer, active, 1);
@@ -66,9 +70,12 @@ char	*apply_minus(char *buffer, t_flag *active)
 	i = 0;
 	j = 0;
 	width = active->width;
-	if (active->diese)
+	if (active->diese && ft_strchr("xXp", active->converter))
 		width -= 2;
-	if (active->plus && ft_strchr("bdiD", active->converter))
+	else if (active->diese && !ft_strchr("bdiD", active->converter))
+		width -= 1;
+	if (active->plus && ft_strchr("bdiD", active->converter) &&
+			ft_atoi(buffer) >= 0)
 		width -= 1;
 	if ((int)ft_strlen(buffer) >= width)
 		return (buffer);

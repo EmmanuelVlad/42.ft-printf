@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:13:17 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:04:19 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 21:00:08 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*apply_precision(char *buffer, int length, t_flag *active)
 		freemalloc(buffer, active, 0);
 		return ("\0");
 	}
-	else if (length >= active->precision)
+	else if (length >= active->precision || active->converter == '%')
 		return (buffer);
 	else if (length < active->precision && ft_strchr("cC", active->converter))
 		return (buffer);

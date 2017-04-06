@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 15:43:01 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/03 17:47:10 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 21:12:50 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_length	*init_length(void)
 {
 	t_length	*length;
-	
+
 	if (!(length = (t_length*)malloc(sizeof(t_length))))
 		return (NULL);
 	length->len = 0;

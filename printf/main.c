@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:32:48 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:19:26 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:21:03 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,52 @@ int		main(void)
 	ft_printf("FT_PRINTF: '% u'", (unsigned int)4294967295);
 	printf("\n   PRINTF: '%u'\n\n", (unsigned int)4294967295);
 
-	ft_printf("FT_PRINTF: '%hU'", (unsigned long)4294967296);
-	printf("\n   PRINTF: '%hU'\n\n", (unsigned long)4294967296);
+	ft_printf("FT_PRINTF: '%lU'", (unsigned long)4294967296);
+	printf("\n   PRINTF: '%lU'\n\n", (unsigned long)4294967296);
 
-	ft_printf("BONUS (BINARY): '%b'", 1337);
+	ft_printf("FT_PRINTF: '%3c'", 0);
+	printf("\n   PRINTF: '%3c'\n\n", 0);
+
+	ft_printf("FT_PRINTF: '%hU'", 4294967296);
+	printf("\n   PRINTF: '%hU'\n\n", 4294967296);
+
+	ft_printf("FT_PRINTF: '%U'", 4294967296);
+	printf("\n   PRINTF: '%U'\n\n", 4294967296);
+
+	ft_printf("FT_PRINTF: '%-#6o'", 2500);
+	printf("\n   PRINTF: '%-#6o'\n\n", 2500);
+
+	ft_printf("FT_PRINTF: '%.0%'");
+	printf("\n   PRINTF: '%.0%'\n\n");
+
+	ft_printf("FT_PRINTF: '%'");
+	printf("\n   PRINTF: '%'\n\n");
+
+	ft_printf("FT_PRINTF: '%0 d'", 42);
+	printf("\n   PRINTF: '%0 d'\n\n", 42);
+
+	ft_printf("FT_PRINTF: '%lhh'", "2147483647");
+	printf("\n   PRINTF: '%lhh'\n\n", "2147483647");
+
+	ft_printf("FT_PRINTF: '%-0+5d'", -42);
+	printf("\n   PRINTF: '%-0+5d'\n\n", -42);
+
+	ft_printf("FT_PRINTF: '% Z'", 42);
+	printf("\n   PRINTF: '% Z'\n\n", 42);
+
+	ft_printf("FT_PRINTF: '%jhd'", "9223372036854775807");
+	printf("\n   PRINTF: '%jhd'\n\n", "9223372036854775807");
+
+	ft_printf("FT_PRINTF: '% Z'", 42);
+	printf("\n   PRINTF: '% Z'\n\n", 42);
+
+	printf("FT_PRINT: '%d'", ft_printf("%zj", "9223372036854775807"));
+	printf("\n   PRINT: '%d'\n\n", printf("%zj", "9223372036854775807"));
+
+	printf("FT_PRINT: '{%d}'", ft_printf("@main_ftprintf: %#-08+...d", 256));
+	printf("\n   PRINT: '{%d}'\n\n", printf("@main_ftprintf: %#-08+...d", 256));
+	printf("@main_ftprintf: %#-+08.d", 256);
+
+	//ft_printf("BONUS (BINARY): '%b'", 1337);
 	return (0);
 }
