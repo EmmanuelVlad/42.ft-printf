@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/04/06 20:44:08 by evlad            ###   ########.fr        #
+#    Updated: 2017/04/06 22:34:02 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,6 @@ PRINTF_LIST = ft_printf.c \
 			  conv_2.c \
 			  cast.c \
 			  freemalloc.c \
-			  main.c
 
 PRINTF_PATH = $(OBJ_PATH)printf/
 
@@ -114,20 +113,19 @@ OK = "\033[1;32m[OK]\033[0m"
 $(LIBFT_PATH)%.o: $(LIBFT_FILES) ./libft/libft.h ./printf/printf.h
 	@mkdir -p $(OBJ_PATH)
 	@mkdir -p $(LIBFT_PATH)
-	@gcc -c ./libft/$(@F:%.o=%.c) -o $@
+	@gcc $(FLAGS) -c ./libft/$(@F:%.o=%.c) -o $@
 
 
 $(PRINTF_PATH)%.o: $(PRINTF_FILES) ./printf/printf.h ./libft/libft.h
 	@mkdir -p $(OBJ_PATH)
 	@mkdir -p $(PRINTF_PATH)
-	@gcc -c ./printf/$(@F:%.o=%.c) -o $@
+	@gcc $(FLAGS) -c ./printf/$(@F:%.o=%.c) -o $@
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(PRINTF)
 	@echo -n '-> Compilating'
 	@echo -n '.'
-	@gcc $(FLAGS) $(LIBFT) $(PRINTF)
 	@ar rc $(NAME) $(LIBFT) $(PRINTF)
 	@echo -n '.'
 	@ranlib $(NAME)

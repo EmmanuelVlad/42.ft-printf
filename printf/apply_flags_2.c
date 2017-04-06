@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:02:24 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:21:35 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:36:54 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ char	*apply_width(char *buffer, t_flag *active)
 
 char	*apply_minus(char *buffer, t_flag *active)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	char	*str;
 	size_t	width;
 
@@ -77,13 +77,13 @@ char	*apply_minus(char *buffer, t_flag *active)
 	if (active->plus && ft_strchr("bdiD", active->converter) &&
 			ft_atoi(buffer) >= 0)
 		width -= 1;
-	if ((int)ft_strlen(buffer) >= width)
+	if (ft_strlen(buffer) >= width)
 		return (buffer);
 	str = ft_strnew(width + 1);
-	while (j < (int)ft_strlen(buffer))
+	while (j < ft_strlen(buffer))
 		str[i++] = buffer[j++];
 	j = 0;
-	while (j++ < (width - (int)ft_strlen(buffer)))
+	while (j++ < (width - ft_strlen(buffer)))
 		str[i++] = ' ';
 	str[i] = '\0';
 	freemalloc(buffer, active, 1);

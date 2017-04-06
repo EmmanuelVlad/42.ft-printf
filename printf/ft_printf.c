@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 08:33:26 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:10:45 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:29:39 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		ft_printf(const char *restrict format, ...)
 			i++;
 		}
 	}
-	i = len->len;
 	free(len);
 	va_end(args);
 	return (len->len);

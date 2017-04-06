@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:03:12 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 21:34:52 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:37:46 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*apply_zero_p(char *buffer, t_flag *active)
 	str = ft_strdup(buffer);
 	str[0] = '0';
 	str[1] = 'x';
+	i = 2;
 	while (str[i] != 'x' && str[i])
 		str[i++] = '0';
 	str[i] = '0';
@@ -40,7 +41,7 @@ char	*apply_zero_p(char *buffer, t_flag *active)
 	return (str);
 }
 
-char	*apply_zero_3(char *buffer, t_flag *active)
+char	*apply_zero_3(char *buffer)
 {
 	int		j;
 
@@ -87,7 +88,7 @@ char	*apply_zero(char *buffer, t_flag *active)
 	if (active->minus)
 		return (buffer);
 	else if (ft_atoi(buffer) < 0)
-		str = apply_zero_3(buffer, active);
+		str = apply_zero_3(buffer);
 	else
 		str = apply_zero_2(buffer, active);
 	return (buffer);

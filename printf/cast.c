@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/27 18:12:39 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 21:49:18 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:38:41 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ intmax_t	signed_cast(va_list args, t_flag *active)
 {
 	intmax_t nb;
 
+	nb = 0;
 	if (active->z)
 		nb = va_arg(args, size_t);
 	else if (active->j)
@@ -35,6 +36,7 @@ uintmax_t	unsigned_cast(va_list args, t_flag *active)
 {
 	uintmax_t nb;
 
+	nb = 0;
 	if (active->z)
 		nb = va_arg(args, ssize_t);
 	else if (active->j)

@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 11:25:11 by evlad             #+#    #+#             */
-/*   Updated: 2016/11/09 13:55:38 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:35:01 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int	i;
-	int	j;
-	int	k;
+	size_t	i;
+	int		j;
+	int		k;
 
 	i = 0;
 	j = 0;

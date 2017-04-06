@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:53:31 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:38:16 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		conv_c(char type, t_flag *active, va_list args, t_length *len)
 
 int		conv_ws(char type, t_flag *active, va_list args, t_length *len)
 {
-	if (type && active && args)
+	if (type && active && args && len)
 		return (1);
 	return (0);
 }

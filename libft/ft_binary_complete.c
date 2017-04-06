@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 19:04:38 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 19:15:22 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:35:29 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_binary_complete(char *str)
 {
 	char	*newstr;
-	int		i;
+	size_t		i;
 	size_t	len;
 
 	i = 0;
