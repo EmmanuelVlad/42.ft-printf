@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/03 17:37:38 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 16:40:33 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		conv_c(char type, t_flag *active, va_list args, t_length *len)
 {
 	char	*str;
 
-	str = ft_strnew(2)	;
+	str = ft_strnew(2);
 	active->first_malloc = 1;
 	str[0] = (unsigned char)va_arg(args, int);
 	str[1] = '\0';

@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/04/03 18:47:13 by evlad            ###   ########.fr        #
+#    Updated: 2017/04/06 20:28:07 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,11 +88,12 @@ PRINTF_LIST = ft_printf.c \
 			  apply_flags_2.c \
 			  apply_precision.c \
 			  apply_zero.c \
+			  apply_diese.c \
 			  conv_1.c \
 			  conv_2.c \
 			  cast.c \
 			  freemalloc.c \
-			  main.c
+#			  main.c
 
 PRINTF_PATH = $(OBJ_PATH)printf/
 
@@ -126,7 +127,7 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(PRINTF)
 	@echo -n '-> Compilating'
 	@echo -n '.'
-	@gcc $(FLAGS) $(LIBFT) $(PRINTF)
+#	@gcc $(FLAGS) $(LIBFT) $(PRINTF)
 	@ar rc $(NAME) $(LIBFT) $(PRINTF)
 	@echo -n '.'
 	@ranlib $(NAME)

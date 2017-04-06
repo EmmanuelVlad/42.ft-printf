@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:31:07 by evlad             #+#    #+#             */
-/*   Updated: 2017/03/30 19:11:15 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 20:15:49 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char				*ft_strnstr(const char *big, const char *little,
 								size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t len);
-int					ft_atoi(const char *str);
+intmax_t			ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);

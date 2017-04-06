@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/03 18:51:52 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 19:21:50 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*other_int(va_list args, t_flag *active)
 	else if (active->converter == 'o')
 		return (ft_itoa_base_uint((va_arg(args, uintmax_t)), 8));
 	else if (active->converter == 'u')
-		return (ft_itoa_base(va_arg(args, unsigned int), 10));
+		return (ft_itoa_base_uint(va_arg(args, unsigned int), 10));
 	else if (active->converter == 'x')
 		return (ft_itoa_base_uint(va_arg(args, unsigned int), 16));
 	else if (active->converter == 'X')

@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 15:06:27 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/03 14:43:01 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 17:56:53 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		check_flags(const char *flag, t_flag *active)
 		active->space = 1;
 	if (flag[0] == '#')
 		active->diese = 1;
-	if (flag[0] == '0')
+	if (flag[0] == '0' && active->precision == -1)
 		active->zero = 1;
 	if (flag[0] == '-')
 		active->minus = 1;

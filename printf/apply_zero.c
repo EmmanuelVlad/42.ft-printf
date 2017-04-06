@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:03:12 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/03 18:12:15 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 20:15:15 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ char	*apply_zero_x(char *buffer, t_flag *active)
 	buffer[0] = '0';
 	buffer[1] = active->converter;
 	while (buffer[i] != active->converter)
-	{
-		buffer[i] = '0';
-		i++;
-	}
+		buffer[i++] = '0';
 	buffer[i] = '0';
 	return (buffer);
 }
@@ -45,22 +42,17 @@ char	*apply_zero_p(char *buffer, t_flag *active)
 
 char	*apply_zero_3(char *buffer, t_flag *active)
 {
-	char	*str;
-	int		i;
 	int		j;
 
-	str = ft_strnew(ft_strlen(buffer) + 1);
-	str[0] = '-';
+	buffer[0] = '-';
+	j = 1;
 	while (buffer[j])
 	{
-		while (buffer[j] == ' ')
-			buffer[j++] = '0';
-		if (buffer[j] == '-')
-			buffer[j++] = '0';
+		if (buffer[j] == '-' || buffer[j] == ' ')
+			buffer[j] = '0';
+		j++;
 	}
-	ft_strcpy(str + 1, buffer + j);
-	freemalloc(buffer, active, 1);
-	return (str);
+	return (buffer);
 }
 
 char	*apply_zero_2(char *buffer, t_flag *active)
@@ -68,6 +60,8 @@ char	*apply_zero_2(char *buffer, t_flag *active)
 	int		i;
 
 	i = 0;
+	if (active->precision >= 0)
+		i = ft_strlen(buffer) - active->precision;
 	if ((active->converter == 'x' || active->converter == 'X') && active->diese)
 		return (apply_zero_x(buffer, active));
 	else if (active->converter == 'p')
