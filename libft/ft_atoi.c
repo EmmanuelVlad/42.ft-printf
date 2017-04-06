@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:49:20 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:15:51 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:49:50 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 intmax_t	ft_atoi(const char *str)
 {
-	int i;
-	intmax_t number;
-	int sign;
+	int			i;
+	intmax_t	number;
+	int			sign;
 
 	i = 0;
 	number = 0;

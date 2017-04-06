@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:03:12 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:37:46 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:45:09 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char	*apply_zero_x(char *buffer, t_flag *active)
 
 	i = 2;
 	buffer[0] = '0';
-	buffer[1] = active->converter;
-	while (buffer[i] != active->converter)
+	buffer[1] = active->type;
+	while (buffer[i] != active->type)
 		buffer[i++] = '0';
 	buffer[i] = '0';
 	return (buffer);
@@ -65,9 +65,9 @@ char	*apply_zero_2(char *buffer, t_flag *active)
 		i = ft_strlen(buffer) - active->precision;
 	if (active->space)
 		i += 1;
-	if ((active->converter == 'x' || active->converter == 'X') && active->diese)
+	if ((active->type == 'x' || active->type == 'X') && active->diese)
 		return (apply_zero_x(buffer, active));
-	else if (active->converter == 'p')
+	else if (active->type == 'p')
 		return (apply_zero_p(buffer, active));
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 15:34:55 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:51:51 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:48:28 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct		s_flag
 	int				hh;
 	int				j;
 	int				z;
-	char			converter;
+	char			type;
 	int				length;
 
 	int				first_malloc;
@@ -97,7 +97,8 @@ char				*apply_zero(char *buffer, t_flag *active);
 char				*apply_plus(char *buffer, t_flag *active);
 char				*apply_width(char *buffer, t_flag *active);
 char				*apply_space(char *buffer, t_flag *active);
-char				*apply_last_flags(char *buffer, int length, t_flag *active);
+char				*apply_last_flags(char *buffer, int length,
+						t_flag *active);
 char				*apply_precision(char *buffer, int length, t_flag *active);
 char				*apply_minus(char *buffer, t_flag *active);
 
@@ -107,10 +108,11 @@ char				*apply_minus(char *buffer, t_flag *active);
 ** --------------------------------------------------------------------------
 */
 
-int					conv(char type, t_flag *active, va_list args, t_length *len);
-int					conv_int(char type, t_flag *active, va_list args, 
+int					conv(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_dou(char type, t_flag *active, va_list args, 
+int					conv_int(char type, t_flag *active, va_list args,
+						t_length *len);
+int					conv_dou(char type, t_flag *active, va_list args,
 						t_length *len);
 int					conv_c(char type, t_flag *active, va_list args,
 						t_length *len);

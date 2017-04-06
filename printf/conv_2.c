@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:38:16 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:45:14 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		conv_c(char type, t_flag *active, va_list args, t_length *len)
 	active->first_malloc = 1;
 	str[0] = (unsigned char)va_arg(args, int);
 	str[1] = '\0';
-	active->converter = type;
+	active->type = type;
 	apply_flags(str, 1, active, len);
 	return (1);
 }
@@ -58,7 +58,7 @@ int		conv_p(char type, t_flag *active, va_list args, t_length *len)
 	ft_strcpy(str, "0x");
 	ft_strcat(str, address);
 	free(address);
-	active->converter = type;
+	active->type = type;
 	active->first_malloc = 1;
 	apply_flags(str, ft_strlen(str), active, len);
 	return (1);
@@ -68,7 +68,7 @@ int		conv_pct(char type, t_flag *active, va_list args, t_length *len)
 {
 	(void)type;
 	(void)args;
-	active->converter = '%';
+	active->type = '%';
 	apply_flags("%\0", 1, active, len);
 	return (1);
 }

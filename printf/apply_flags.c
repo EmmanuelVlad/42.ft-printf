@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 18:34:53 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 21:09:58 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:46:14 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*apply_space(char *buffer, t_flag *active)
 	char	*str;
 
 	if (active->plus || ft_atoi(buffer) < 0 ||
-			ft_strchr("%cu", active->converter))
+			ft_strchr("%cu", active->type))
 		return (buffer);
 	str = ft_strnew(ft_strlen(buffer) + 1);
 	str[0] = ' ';
@@ -29,12 +29,12 @@ char	*apply_space(char *buffer, t_flag *active)
 char	*apply_flags_2(char *buffer, int length, t_flag *active)
 {
 	if (active->precision == 0 && active->diese == 1 &&
-			ft_strchr("oO", active->converter) && ft_atoi(buffer) == 0)
+			ft_strchr("oO", active->type) && ft_atoi(buffer) == 0)
 	{
 		freemalloc(buffer, active, 0);
 		return ("0");
 	}
-	if (active->precision != -1 && active->converter != '%')
+	if (active->precision != -1 && active->type != '%')
 		buffer = apply_precision(buffer, length, active);
 	if (active->space)
 		buffer = apply_space(buffer, active);
@@ -55,7 +55,7 @@ void	apply_flags(char *buffer, int length, t_flag *active, t_length *len)
 {
 	buffer = apply_flags_2(buffer, length, active);
 	ft_putstr(buffer);
-	if (active->converter == 'c')
+	if (active->type == 'c')
 	{
 		len->len += 1;
 		if (active->width)

@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:13:17 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 21:00:08 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:46:37 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ char	*apply_precision_2(char *buffer, int length, t_flag *active)
 	char	*str;
 	int		i;
 
-	if (active->converter == 'b')
+	if (active->type == 'b')
 		return (buffer);
-	if (active->converter == 'o' && active->precision == 0)
+	if (active->type == 'o' && active->precision == 0)
 		return (buffer);
 	if (ft_atoi(buffer) < 0)
 		return (apply_precision_negative(buffer, length, active));
 	str = ft_strnew(active->precision + 1);
 	i = 0;
-	while ((i < (active->precision - length)) && active->converter != 's')
+	while ((i < (active->precision - length)) && active->type != 's')
 		str[i++] = '0';
 	ft_strcpy(str + i, buffer);
 	freemalloc(buffer, active, 1);
@@ -51,21 +51,21 @@ char	*apply_precision_2(char *buffer, int length, t_flag *active)
 
 char	*apply_precision(char *buffer, int length, t_flag *active)
 {
-	if (length >= active->precision && active->converter == 's')
+	if (length >= active->precision && active->type == 's')
 	{
 		active->second_malloc = 1;
 		return (ft_strsub(buffer, 0, active->precision));
 	}
-	else if (length >= active->precision && active->converter == 'S')
+	else if (length >= active->precision && active->type == 'S')
 		return (0);
 	else if (ft_atoi(buffer) == 0 && active->precision == 0)
 	{
 		freemalloc(buffer, active, 0);
 		return ("\0");
 	}
-	else if (length >= active->precision || active->converter == '%')
+	else if (length >= active->precision || active->type == '%')
 		return (buffer);
-	else if (length < active->precision && ft_strchr("cC", active->converter))
+	else if (length < active->precision && ft_strchr("cC", active->type))
 		return (buffer);
 	else
 		return (apply_precision_2(buffer, length, active));

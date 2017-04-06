@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:02:24 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:36:54 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:44:41 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*apply_plus(char *buffer, t_flag *active)
 
 	str = NULL;
 	i = 0;
-	if (!ft_strchr("bdiD", active->converter) || ft_atoi(buffer) < 0)
+	if (!ft_strchr("bdiD", active->type) || ft_atoi(buffer) < 0)
 		return (buffer);
 	if (active->zero && buffer[0] == '0')
 		buffer[0] = '+';
@@ -48,7 +48,7 @@ char	*apply_width(char *buffer, t_flag *active)
 
 	i = 0;
 	len = ft_strlen(buffer);
-	if (active->converter == 'c')
+	if (active->type == 'c')
 		len = 1;
 	if (len >= active->width)
 		return (buffer);
@@ -70,12 +70,11 @@ char	*apply_minus(char *buffer, t_flag *active)
 	i = 0;
 	j = 0;
 	width = active->width;
-	if (active->diese && ft_strchr("xXp", active->converter))
+	if (active->diese && ft_strchr("xXp", active->type))
 		width -= 2;
-	else if (active->diese && !ft_strchr("bdiD", active->converter))
+	else if (active->diese && !ft_strchr("bdiD", active->type))
 		width -= 1;
-	if (active->plus && ft_strchr("bdiD", active->converter) &&
-			ft_atoi(buffer) >= 0)
+	if (active->plus && ft_strchr("bdiD", active->type) && ft_atoi(buffer) >= 0)
 		width -= 1;
 	if (ft_strlen(buffer) >= width)
 		return (buffer);

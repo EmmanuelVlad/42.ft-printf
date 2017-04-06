@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:27:44 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 21:11:30 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:45:05 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*apply_diese_x(char *buffer, t_flag *active)
 	str = ft_strnew(ft_strlen(buffer) + 2);
 	str[0] = '0';
 	str[1] = 'x';
-	if (active->converter == 'X')
+	if (active->type == 'X')
 		str[1] = 'X';
 	ft_strcpy(str + 2, buffer);
 	freemalloc(buffer, active, 1);
@@ -54,11 +54,11 @@ char	*apply_diese(char *buffer, t_flag *active)
 	int		i;
 
 	i = 0;
-	if (ft_strchr("csdiupUCDS%", active->converter) || ft_atoi(buffer) == 0)
+	if (ft_strchr("csdiupUCDS%", active->type) || ft_atoi(buffer) == 0)
 		return (buffer);
-	else if (active->converter == 'o' && !active->hh)
+	else if (active->type == 'o' && !active->hh)
 		return (apply_diese_2(buffer, active));
-	else if (ft_strchr("xX", active->converter))
+	else if (ft_strchr("xX", active->type))
 		return (apply_diese_x(buffer, active));
 	return (buffer);
 }

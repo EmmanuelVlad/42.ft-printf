@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 21:15:20 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/06 22:46:44 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ char	*sized_oux_int(va_list args, t_flag *active)
 
 	active->first_malloc = 1;
 	u_int = unsigned_cast(args, active);
-	if (active->converter == 'o')
+	if (active->type == 'o')
 		return (ft_itoa_base_uint(u_int, 8));
-	else if (active->converter == 'u')
+	else if (active->type == 'u')
 		return (ft_itoa_base_uint(u_int, 10));
-	else if (active->converter == 'X')
+	else if (active->type == 'X')
 		return (ft_strtoupper(ft_itoa_base_uint(u_int, 16)));
 	return (ft_itoa_base_uint(u_int, 16));
 }
@@ -53,15 +53,15 @@ char	*sized_oux_int(va_list args, t_flag *active)
 char	*other_int(va_list args, t_flag *active)
 {
 	active->first_malloc = 1;
-	if (active->converter == 'b')
+	if (active->type == 'b')
 		return (ft_binary_complete(ft_itoa_base_uint(va_arg(args, int), 2)));
-	else if (active->converter == 'o')
+	else if (active->type == 'o')
 		return (ft_itoa_base_uint((va_arg(args, uintmax_t)), 8));
-	else if (active->converter == 'u')
+	else if (active->type == 'u')
 		return (ft_itoa_base_uint(va_arg(args, unsigned int), 10));
-	else if (active->converter == 'x')
+	else if (active->type == 'x')
 		return (ft_itoa_base_uint(va_arg(args, unsigned int), 16));
-	else if (active->converter == 'X')
+	else if (active->type == 'X')
 	{
 		return (ft_strtoupper(
 					ft_itoa_base_uint(va_arg(args, unsigned int), 16)));
@@ -75,9 +75,9 @@ int		conv_int(char type, t_flag *active, va_list args, t_length *len)
 	int			length;
 	char		*str;
 
-	active->converter = type;
+	active->type = type;
 	s_int = 0;
-	if (check_size(active) && ft_strchr("di", active->converter))
+	if (check_size(active) && ft_strchr("di", active->type))
 	{
 		s_int = signed_cast(args, active);
 		if (s_int == -9223372036854775807 - 1)
@@ -88,7 +88,7 @@ int		conv_int(char type, t_flag *active, va_list args, t_length *len)
 			str = ft_itoa_base(s_int, 10);
 		}
 	}
-	else if (check_size(active) && ft_strchr("ouxX", active->converter))
+	else if (check_size(active) && ft_strchr("ouxX", active->type))
 		str = sized_oux_int(args, active);
 	else
 		str = other_int(args, active);
@@ -106,7 +106,7 @@ int		conv_s(char type, t_flag *active, va_list args, t_length *len)
 	if (str == NULL)
 		str = "(null)";
 	length = ft_strlen(str);
-	active->converter = type;
+	active->type = type;
 	apply_flags(str, length, active, len);
 	if (length == 0)
 		return (1);
