@@ -6,11 +6,37 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:13:17 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:46:37 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/07 21:19:34 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+
+char	*apply_precision_p(char *buffer, int length, t_flag *active)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	str = ft_strnew(active->precision + 2);
+	i = 0;
+	j = 2;
+	if (ft_strlen(buffer) == 3)
+	{
+		while (i < active->precision + 2)
+			str[i++] = '0';
+	}
+	else
+	{
+		while (i < (active->precision + 4) - (int)ft_strlen(buffer))
+			str[i++] = '0';
+		while (str[j])
+			str[i++] = buffer[j++];
+	}
+	str[1] = 'x';
+	freemalloc(buffer, active, 1);
+	return (str);
+}
 
 char	*apply_precision_negative(char *buffer, int length, t_flag *active)
 {
@@ -51,7 +77,11 @@ char	*apply_precision_2(char *buffer, int length, t_flag *active)
 
 char	*apply_precision(char *buffer, int length, t_flag *active)
 {
-	if (length >= active->precision && active->type == 's')
+	if (active->precision == 0 && active->type == 'p')
+		return (buffer);
+	else if (active->precision >= (int)ft_strlen(buffer) && active->type == 'p')
+		return (apply_precision_p(buffer, length, active));
+	else if (length >= active->precision && active->type == 's')
 	{
 		active->second_malloc = 1;
 		return (ft_strsub(buffer, 0, active->precision));

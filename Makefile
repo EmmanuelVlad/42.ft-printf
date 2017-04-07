@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/04/06 22:34:02 by evlad            ###   ########.fr        #
+#    Updated: 2017/04/07 18:28:57 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,8 @@ LIST = ft_memset.c \
 	   ft_strtoupper.c \
 	   ft_strtolower.c \
 	   ft_binary_complete.c \
+	   ft_wstrlen.c \
+	   ft_putwchar.c \
 
 LIBFT_PATH = $(OBJ_PATH)libft/
 
@@ -93,6 +95,7 @@ PRINTF_LIST = ft_printf.c \
 			  conv_2.c \
 			  cast.c \
 			  freemalloc.c \
+			  main.c
 
 PRINTF_PATH = $(OBJ_PATH)printf/
 
@@ -104,7 +107,9 @@ PRINTF = $(PRINTF_OBJ:%=$(PRINTF_PATH)%)
 
 OBJ_PATH = ./obj/
 
-FLAGS = -Wextra -Werror -Wall
+FLAGS = 
+
+#FLAGS = -Wextra -Werror -Wall
 
 NAME = libftprintf.a
 
@@ -126,6 +131,7 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(PRINTF)
 	@echo -n '-> Compilating'
 	@echo -n '.'
+	@gcc $(LIBFT) $(PRINTF)
 	@ar rc $(NAME) $(LIBFT) $(PRINTF)
 	@echo -n '.'
 	@ranlib $(NAME)

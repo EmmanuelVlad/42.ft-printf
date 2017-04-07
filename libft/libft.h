@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:31:07 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 20:15:49 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/07 18:26:57 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+
+size_t				ft_wstrlen(wchar_t *str);
+char				*ft_putwchar(wchar_t w);
 
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);

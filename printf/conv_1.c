@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:46:44 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/07 19:18:19 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		conv(char type, t_flag *active, va_list args, t_length *len)
 		{ "s", &conv_s },
 		{ "S", &conv_ws },
 		{ "p", &conv_p },
-		{ "%", &conv_pct }
+		{ "%ZR", &conv_pct }
 	};
 
 	i = 0;
@@ -56,7 +56,7 @@ char	*other_int(va_list args, t_flag *active)
 	if (active->type == 'b')
 		return (ft_binary_complete(ft_itoa_base_uint(va_arg(args, int), 2)));
 	else if (active->type == 'o')
-		return (ft_itoa_base_uint((va_arg(args, uintmax_t)), 8));
+		return (ft_itoa_base_uint((va_arg(args, unsigned int)), 8));
 	else if (active->type == 'u')
 		return (ft_itoa_base_uint(va_arg(args, unsigned int), 10));
 	else if (active->type == 'x')
@@ -102,7 +102,10 @@ int		conv_s(char type, t_flag *active, va_list args, t_length *len)
 	char	*str;
 	int		length;
 
-	str = va_arg(args, char*);
+	if (!active->l)
+		str = va_arg(args, char*);
+	else
+		return (conv_ws(type, active, args, len));
 	if (str == NULL)
 		str = "(null)";
 	length = ft_strlen(str);

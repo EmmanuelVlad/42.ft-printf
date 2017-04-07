@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 08:33:26 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/07 19:01:43 by evlad            ###   ########.fr       */
+/*   Created: 2017/04/07 18:22:29 by evlad             #+#    #+#             */
+/*   Updated: 2017/04/07 20:15:23 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *restrict format, ...)
+size_t	ft_wstrlen(wchar_t *str)
 {
-	int			i;
-	t_length	*len;
-	va_list		args;
+	size_t	length;
 
-	i = 0;
-	len = init_length();
-	va_start(args, format);
-	while (format[i])
+	length = 0;
+	while (*str)
 	{
-		if (format[i] == '%')
-			i += formating(format + i, args, len);
-		else
-		{
-			write(1, &(format[i]), 1);
-			len->len++;
-			i++;
-		}
+		if (*str <= 0x70F)
+			length++;
+		else if (*str <= 0x7FF)
+			length += 2;
+		else if (*str <= 0xFFFF)
+			length += 3;
+		else if (*str <= 0x10FFFF)
+			length += 4;
+		str++;
 	}
-	free(len);
-	va_end(args);
-	return (len->len);
+	return (length);
 }

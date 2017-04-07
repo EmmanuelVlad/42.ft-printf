@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 18:34:53 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:46:14 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/07 21:24:22 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*apply_space(char *buffer, t_flag *active)
 	char	*str;
 
 	if (active->plus || ft_atoi(buffer) < 0 ||
-			ft_strchr("%cu", active->type))
+			ft_strchr("%cuZRpoxX", active->type))
 		return (buffer);
 	str = ft_strnew(ft_strlen(buffer) + 1);
 	str[0] = ' ';
@@ -34,7 +34,7 @@ char	*apply_flags_2(char *buffer, int length, t_flag *active)
 		freemalloc(buffer, active, 0);
 		return ("0");
 	}
-	if (active->precision != -1 && active->type != '%')
+	if (active->precision != -1 && !ft_strchr("%ZR", active->type))
 		buffer = apply_precision(buffer, length, active);
 	if (active->space)
 		buffer = apply_space(buffer, active);
@@ -55,7 +55,7 @@ void	apply_flags(char *buffer, int length, t_flag *active, t_length *len)
 {
 	buffer = apply_flags_2(buffer, length, active);
 	ft_putstr(buffer);
-	if (active->type == 'c')
+	if (ft_strchr("cC", active->type))
 	{
 		len->len += 1;
 		if (active->width)

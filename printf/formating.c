@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 08:14:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:46:23 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/07 19:43:25 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		formating(const char *restrict format, va_list args, t_length *len)
 		return (i);
 	while (ft_strchr(" .0123456789+-#lhjz", format[i]) && format[i])
 		i += 1 + check_flags(format + i, active);
-	if (ft_strchr("bdiouxXDOUCcsSp%", format[i]) && format[i])
+	if (ft_strchr("bdiouxXDOUCcsSp%ZR", format[i]) && format[i])
 	{
 		conv(format[i], active, args, len);
 		i++;
