@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/07 21:32:26 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/07 21:53:30 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		conv_p(char type, t_flag *active, va_list args, t_length *len)
 int		conv_pct(char type, t_flag *active, va_list args, t_length *len)
 {
 	char	str[2];
-	(void)type;
+
 	(void)args;
 	str[0] = (unsigned char)type;
 	str[1] = '\0';
