@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/04/12 15:23:18 by evlad            ###   ########.fr        #
+#    Updated: 2017/04/12 16:29:49 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,8 +106,6 @@ PRINTF_OBJ = $(PRINTF_LIST:%.c=%.o)
 PRINTF = $(PRINTF_OBJ:%=$(PRINTF_PATH)%)
 
 OBJ_PATH = ./obj/
-
-FLAGS = 
 
 FLAGS = -Wextra -Werror -Wall
 
