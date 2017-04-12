@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:27:44 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:45:05 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/12 14:53:47 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*apply_diese_2(char *buffer, t_flag *active)
 	int		i;
 
 	i = 0;
+	if (buffer[0] == '0')
+		return (buffer);
 	if (buffer[0] == ' ')
 	{
 		while (buffer[i] == ' ')

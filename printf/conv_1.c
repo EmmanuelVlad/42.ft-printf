@@ -6,13 +6,13 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:28 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/07 19:18:19 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/12 14:58:35 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int		conv(char type, t_flag *active, va_list args, t_length *len)
+void	conv(char type, t_flag *active, va_list args, t_length *len)
 {
 	int					i;
 	static const t_conv	g_conv[] = {
@@ -29,10 +29,9 @@ int		conv(char type, t_flag *active, va_list args, t_length *len)
 	while (i < 7)
 	{
 		if (ft_strchr(g_conv[i].type, type))
-			return (g_conv[i].function(type, active, args, len));
+			g_conv[i].function(type, active, args, len);
 		i++;
 	}
-	return (0);
 }
 
 char	*sized_oux_int(va_list args, t_flag *active)
@@ -69,7 +68,7 @@ char	*other_int(va_list args, t_flag *active)
 	return (ft_itoa_base(va_arg(args, int), 10));
 }
 
-int		conv_int(char type, t_flag *active, va_list args, t_length *len)
+void	conv_int(char type, t_flag *active, va_list args, t_length *len)
 {
 	intmax_t	s_int;
 	int			length;
@@ -94,10 +93,9 @@ int		conv_int(char type, t_flag *active, va_list args, t_length *len)
 		str = other_int(args, active);
 	length = ft_strlen(str);
 	apply_flags(str, length, active, len);
-	return (length);
 }
 
-int		conv_s(char type, t_flag *active, va_list args, t_length *len)
+void	conv_s(char type, t_flag *active, va_list args, t_length *len)
 {
 	char	*str;
 	int		length;
@@ -111,7 +109,4 @@ int		conv_s(char type, t_flag *active, va_list args, t_length *len)
 	length = ft_strlen(str);
 	active->type = type;
 	apply_flags(str, length, active, len);
-	if (length == 0)
-		return (1);
-	return (length);
 }

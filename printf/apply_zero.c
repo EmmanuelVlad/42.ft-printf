@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:03:12 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/07 21:26:19 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/12 15:22:01 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	*apply_zero_p(char *buffer, t_flag *active)
 	i = 2;
 	while (str[i] != 'x' && str[i])
 		str[i++] = '0';
-	str[i] = '0';
+	if (str[i] == 'x')
+		str[i] = '0';
 	freemalloc(buffer, active, 1);
 	return (str);
 }
@@ -61,20 +62,19 @@ char	*apply_zero_2(char *buffer, t_flag *active)
 	int		i;
 
 	i = 0;
-	if (active->precision > 0)
+	if (active->precision >= 0 && !ft_strchr("cCsS%Z", active->type))
 		i = ft_strlen(buffer) - active->precision;
 	if (active->space)
 		i += 1;
 	if ((active->type == 'x' || active->type == 'X') && active->diese)
 		return (apply_zero_x(buffer, active));
-	else if (active->type == 'p')
+	else if (active->type == 'p' && check_address(buffer))
 		return (apply_zero_p(buffer, active));
 	else
 	{
-		while (buffer[i])
+		while (buffer[i] == ' ')
 		{
-			if (buffer[i] == ' ')
-				buffer[i] = '0';
+			buffer[i] = '0';
 			i++;
 		}
 	}
@@ -83,13 +83,12 @@ char	*apply_zero_2(char *buffer, t_flag *active)
 
 char	*apply_zero(char *buffer, t_flag *active)
 {
-	char	*str;
-
+	if (active->type == 'c' && *buffer == '\0')
+		active->null = 1;
 	if (active->minus)
 		return (buffer);
 	else if (ft_atoi(buffer) < 0)
-		str = apply_zero_3(buffer);
+		return (apply_zero_3(buffer));
 	else
-		str = apply_zero_2(buffer, active);
-	return (buffer);
+		return (apply_zero_2(buffer, active));
 }

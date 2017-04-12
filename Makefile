@@ -6,7 +6,7 @@
 #    By: evlad <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:36:40 by evlad             #+#    #+#              #
-#    Updated: 2017/04/07 18:28:57 by evlad            ###   ########.fr        #
+#    Updated: 2017/04/12 15:23:18 by evlad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ PRINTF_LIST = ft_printf.c \
 			  conv_2.c \
 			  cast.c \
 			  freemalloc.c \
-			  main.c
+			  strsubwchar.c \
 
 PRINTF_PATH = $(OBJ_PATH)printf/
 
@@ -109,7 +109,7 @@ OBJ_PATH = ./obj/
 
 FLAGS = 
 
-#FLAGS = -Wextra -Werror -Wall
+FLAGS = -Wextra -Werror -Wall
 
 NAME = libftprintf.a
 
@@ -131,7 +131,6 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(PRINTF)
 	@echo -n '-> Compilating'
 	@echo -n '.'
-	@gcc $(LIBFT) $(PRINTF)
 	@ar rc $(NAME) $(LIBFT) $(PRINTF)
 	@echo -n '.'
 	@ranlib $(NAME)

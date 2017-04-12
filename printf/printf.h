@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 15:34:55 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:48:28 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/12 14:58:29 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct		s_flag
 
 	int				first_malloc;
 	int				second_malloc;
+	int				null;
+	wchar_t			*buff;
 }					t_flag;
 
 typedef struct		s_length
@@ -61,7 +63,7 @@ typedef struct		s_length
 typedef struct		s_conv
 {
 	char			*type;
-	int				(*function)(char type, t_flag *active, va_list args,
+	void			(*function)(char type, t_flag *active, va_list args,
 						t_length *len);
 }					t_conv;
 
@@ -75,10 +77,13 @@ int					ft_printf(const char *format, ...);
 int					formating(const char *format, va_list args, t_length *len);
 
 int					check_size(t_flag *active);
+int					check_address(char *buffer);
 intmax_t			signed_cast(va_list args, t_flag *active);
 uintmax_t			unsigned_cast(va_list args, t_flag *active);
 
 void				freemalloc(char *buffer, t_flag *active, int realloc);
+
+char				*strsubwchar(char *buffer, int start, t_flag *active);
 
 /*
 ** --------------------------------------------------------------------------
@@ -108,21 +113,21 @@ char				*apply_minus(char *buffer, t_flag *active);
 ** --------------------------------------------------------------------------
 */
 
-int					conv(char type, t_flag *active, va_list args,
+void				conv(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_int(char type, t_flag *active, va_list args,
+void				conv_int(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_dou(char type, t_flag *active, va_list args,
+void				conv_dou(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_c(char type, t_flag *active, va_list args,
+void				conv_c(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_s(char type, t_flag *active, va_list args,
+void				conv_s(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_ws(char type, t_flag *active, va_list args,
+void				conv_ws(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_p(char type, t_flag *active, va_list args,
+void				conv_p(char type, t_flag *active, va_list args,
 						t_length *len);
-int					conv_pct(char type, t_flag *active, va_list args,
+void				conv_pct(char type, t_flag *active, va_list args,
 						t_length *len);
 
 #endif

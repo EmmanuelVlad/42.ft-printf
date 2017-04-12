@@ -6,13 +6,13 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:13:17 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/07 21:19:34 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/12 15:12:40 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char	*apply_precision_p(char *buffer, int length, t_flag *active)
+char	*apply_precision_p(char *buffer, t_flag *active)
 {
 	char	*str;
 	int		i;
@@ -55,6 +55,17 @@ char	*apply_precision_negative(char *buffer, int length, t_flag *active)
 	return (str);
 }
 
+char	*apply_precision_3(char *buffer, t_flag *active)
+{
+	if (!active->width && active->precision == 0)
+	{
+		freemalloc(buffer, active, 0);
+		return ("");
+	}
+	else
+		return (strsubwchar(buffer, 0, active));
+}
+
 char	*apply_precision_2(char *buffer, int length, t_flag *active)
 {
 	char	*str;
@@ -80,20 +91,21 @@ char	*apply_precision(char *buffer, int length, t_flag *active)
 	if (active->precision == 0 && active->type == 'p')
 		return (buffer);
 	else if (active->precision >= (int)ft_strlen(buffer) && active->type == 'p')
-		return (apply_precision_p(buffer, length, active));
+		return (apply_precision_p(buffer, active));
 	else if (length >= active->precision && active->type == 's')
 	{
 		active->second_malloc = 1;
 		return (ft_strsub(buffer, 0, active->precision));
 	}
 	else if (length >= active->precision && active->type == 'S')
-		return (0);
+		return (apply_precision_3(buffer, active));
 	else if (ft_atoi(buffer) == 0 && active->precision == 0)
 	{
 		freemalloc(buffer, active, 0);
 		return ("\0");
 	}
-	else if (length >= active->precision || active->type == '%')
+	else if (length >= active->precision || active->type == '%' ||
+			(active->plus && active->minus && active->precision == 0))
 		return (buffer);
 	else if (length < active->precision && ft_strchr("cC", active->type))
 		return (buffer);

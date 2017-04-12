@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 18:34:53 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/07 21:24:22 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/12 14:30:28 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ char	*apply_space(char *buffer, t_flag *active)
 {
 	char	*str;
 
+	if (active->type == 'c' && *buffer == '\0')
+		active->null = 1;
+	if (ft_strchr("sS", active->type) &&
+			(ft_strcmp(buffer, "(null)") == 0 || ft_strcmp(buffer, "") == 0))
+		return (buffer);
 	if (active->plus || ft_atoi(buffer) < 0 ||
-			ft_strchr("%cuZRpoxX", active->type))
+			ft_strchr("%cCuZRpoxX", active->type))
 		return (buffer);
 	str = ft_strnew(ft_strlen(buffer) + 1);
 	str[0] = ' ';
@@ -45,7 +50,7 @@ char	*apply_flags_2(char *buffer, int length, t_flag *active)
 	if (active->width && !active->minus)
 		buffer = apply_width(buffer, active);
 	if (active->zero)
-		apply_zero(buffer, active);
+		buffer = apply_zero(buffer, active);
 	if (active->plus)
 		buffer = apply_plus(buffer, active);
 	return (buffer);
@@ -62,6 +67,8 @@ void	apply_flags(char *buffer, int length, t_flag *active, t_length *len)
 			len->len += active->width - 1;
 		if (buffer == '\0')
 			len->len -= 1;
+		if (active->null)
+			ft_putchar('\0');
 	}
 	else
 		len->len += ft_strlen(buffer);

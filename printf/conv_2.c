@@ -6,13 +6,13 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:09:34 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/07 21:53:30 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/12 15:02:45 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int		conv_dou(char type, t_flag *active, va_list args, t_length *len)
+void	conv_dou(char type, t_flag *active, va_list args, t_length *len)
 {
 	if (type == 'D')
 		type = 'd';
@@ -21,10 +21,10 @@ int		conv_dou(char type, t_flag *active, va_list args, t_length *len)
 	else if (type == 'U')
 		type = 'u';
 	active->l = 1;
-	return (conv_int(type, active, args, len));
+	conv_int(type, active, args, len);
 }
 
-int		conv_c(char type, t_flag *active, va_list args, t_length *len)
+void	conv_c(char type, t_flag *active, va_list args, t_length *len)
 {
 	char	*str;
 	int		length;
@@ -32,12 +32,12 @@ int		conv_c(char type, t_flag *active, va_list args, t_length *len)
 	str = NULL;
 	active->type = type;
 	active->first_malloc = 1;
+	length = 1;
 	if (!check_size(active) && active->type == 'c')
 	{
 		str = ft_strnew(2);
 		str[0] = va_arg(args, int);
 		str[1] = '\0';
-		length = 1;
 	}
 	else if (check_size(active) || active->type == 'C')
 	{
@@ -47,41 +47,41 @@ int		conv_c(char type, t_flag *active, va_list args, t_length *len)
 			len->len += length - 1;
 		else
 			len->len += length;
+		if (active->type == 'C' && *str == '\0')
+			active->null = 1;
 	}
 	apply_flags(str, length, active, len);
-	return (length);
 }
 
-int		conv_ws(char type, t_flag *active, va_list args, t_length *len)
+void	conv_ws(char type, t_flag *active, va_list args, t_length *len)
 {
 	wchar_t	*wstr;
 	char	*str;
 	char	*tmp;
+	int		i;
 
 	wstr = va_arg(args, wchar_t*);
+	active->buff = wstr;
 	str = NULL;
 	active->type = type;
+	i = 0;
 	if (wstr == NULL)
-	{
-		str = "(null)";
-		apply_flags(str, 6, active, len);
-	}
+		apply_flags("(null)", 6, active, len);
 	else
 	{
-		str = ft_strnew(ft_wstrlen(wstr) + 1);
+		str = ft_strnew(ft_wstrlen(wstr) * 2);
 		active->first_malloc = 1;
-		while (*wstr)
+		while (wstr[i])
 		{
-			tmp = ft_putwchar(*wstr++);
+			tmp = ft_putwchar(wstr[i++]);
 			str = ft_strcat(str, tmp);
 			free(tmp);
 		}
 		apply_flags(str, ft_wstrlen(wstr), active, len);
 	}
-	return (1);
 }
 
-int		conv_p(char type, t_flag *active, va_list args, t_length *len)
+void	conv_p(char type, t_flag *active, va_list args, t_length *len)
 {
 	void		*ptr;
 	uintptr_t	ptrint;
@@ -99,10 +99,9 @@ int		conv_p(char type, t_flag *active, va_list args, t_length *len)
 	active->type = type;
 	active->first_malloc = 1;
 	apply_flags(str, ft_strlen(str), active, len);
-	return (1);
 }
 
-int		conv_pct(char type, t_flag *active, va_list args, t_length *len)
+void	conv_pct(char type, t_flag *active, va_list args, t_length *len)
 {
 	char	str[2];
 
@@ -111,5 +110,4 @@ int		conv_pct(char type, t_flag *active, va_list args, t_length *len)
 	str[1] = '\0';
 	active->type = type;
 	apply_flags(str, 1, active, len);
-	return (1);
 }

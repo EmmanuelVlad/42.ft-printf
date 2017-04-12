@@ -6,7 +6,7 @@
 /*   By: evlad <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 15:43:01 by evlad             #+#    #+#             */
-/*   Updated: 2017/04/06 22:46:06 by evlad            ###   ########.fr       */
+/*   Updated: 2017/04/11 15:12:07 by evlad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ t_flag		*init_flag(void)
 	flag->type = 0;
 	flag->first_malloc = 0;
 	flag->second_malloc = 0;
+	flag->null = 0;
+	flag->buff = NULL;
 	return (flag);
 }
